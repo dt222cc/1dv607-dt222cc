@@ -2,7 +2,9 @@
 ## StudentId: dt222cc
 
 ## Grade 2 (passing grade)
-- Analysis: ![alt tag](http://yuml.me/f3fe770d)
- - PDF Left to Right: http://yuml.me/f3fe770d.pdf
- - PDF Top Down: http://yuml.me/6d16e796.pdf
-- Analysis: (After First, Pre Review) I simplified stuff removed unnecessary parts as i missed the word "only", which i discovered while doing the review. ![alt tag](http://yuml.me/34bcf381)
+- Analysis (First model):
+	![first_model](http://yuml.me/f3fe770d)
+- Analysis: (During review)
+	![during_review](http://yuml.me/34bcf381)
+- Analysis: (With feedback)
+	![with_feedback](http://yuml.me/a125e518)
