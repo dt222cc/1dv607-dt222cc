@@ -18,3 +18,20 @@
 [Secretary]-manages  >[Calendar]
 [Secretary]-manages  >[All Berths]
 [Calendar]-have>[Events]
+
+
+
+
+
+// Workshop 1 grade 2 dt222cc
+[note: Grade 2][note: dt222cc-WP14]
+[Person]1-system> 1  [Authentication]
+[Authentication]-role>[Secretary]
+[Authentication]-role>[Member]
+[note:Club]->[Authentication]
+[Member]1-administrates *        >[Boat]
+[Boat]1-have 1      >[Berth]
+[Berths]*   -assigned 1      >[Berth]
+[Secretary]1-manages 1    >[Calendar]
+[Secretary]1-manages *    >[Berths]
+[Calendar]1-have *>[Events]
