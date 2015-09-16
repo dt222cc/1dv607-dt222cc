@@ -98,20 +98,30 @@
  - aa223gg	Anna Aldenmark
 
 ##### What are the strong points of the model 
-1. The model covers the main conceptual classes in order to get a good idea of what the project contains.
+- The model covers the main conceptual classes in order to get a good idea of what the project contains.
 
 ##### What are the weaknesses of the model
 1. “Berths” is an extension of the class “All Berths” and should therefore not be written like an individual class. (Larman, fig. 9.5)
-- “Authentication” class is a software aspect and should be removed. According to Larman (section 9.2), the model should be a visualization about things in real life, rather than about software objects.
-- The class “Person” contains no actual information to the model and is redundant since the classes “Member” and “Secretary” already exists.
-- The association lines of the model are cluttering the view as they run through the descriptive text for the different associations; making them unreadable.
-- The view relations between the classes are redundant to the model and should be removed. According to Larman (note [2], section 9.2), the display of conceptual views in a domain have been widely re-interpreted as data models for database design – not for domain models. 
-- It is only optional to have multiplicity expression at each end of an association (Larman, section 9.14), but in this case it would have made the model a lot clearer if they had been included.
-- According to Larman (fig 9.12) you shouldn't use navigation arrows. Good associations will describe which way the arrows should be. Reading direction arrows can be used instead but is often excluded. 
-- The model contains too many associations. Larman’s (section 9.14) recommendation is to avoid this.
-- Class names should be named as singular nouns. (Ambler, section 5.2)
-- The association names includes bad names like “have” instead of names that really show how the classes are connected to each other. (Larman, section 9.14) 
-- The graphical decision of placing the model creator’s name and class inside boxes similar to the ones containing the models class names is confusing and of no immediate purpose. It’s nothing major, but should be mentioned. 
+
+2. “Authentication” class is a software aspect and should be removed. According to Larman (section 9.2), the model should be a visualization about things in real life, rather than about software objects.
+
+3. The class “Person” contains no actual information to the model and is redundant since the classes “Member” and “Secretary” already exists.
+
+4. The association lines of the model are cluttering the view as they run through the descriptive text for the different associations; making them unreadable.
+
+5. The view relations between the classes are redundant to the model and should be removed. According to Larman (note [2], section 9.2), the display of conceptual views in a domain have been widely re-interpreted as data models for database design – not for domain models. 
+
+6. It is only optional to have multiplicity expression at each end of an association (Larman, section 9.14), but in this case it would have made the model a lot clearer if they had been included.
+
+7. According to Larman (fig 9.12) you shouldn't use navigation arrows. Good associations will describe which way the arrows should be. Reading direction arrows can be used instead but is often excluded. 
+
+8. The model contains too many associations. Larman’s (section 9.14) recommendation is to avoid this.
+
+9. Class names should be named as singular nouns. (Ambler, section 5.2)
+
+10. The association names includes bad names like “have” instead of names that really show how the classes are connected to each other. (Larman, section 9.14) 
+
+11. The graphical decision of placing the model creator’s name and class inside boxes similar to the ones containing the models class names is confusing and of no immediate purpose. It’s nothing major, but should be mentioned. 
 
 ##### As a developer would the model help you and why/why not?
 
