@@ -13,21 +13,23 @@
  - aa223ig	Andréas Anemyr	
 
 ##### As a developer would the model help you and why/why not?
-1. I believe that the model is helpful. It's clear, consistent and understandable so you will get a good idea of the projects content.
+- I believe that the model is helpful. It's clear, consistent and understandable so you will get a good idea of the projects content.
 
 ##### Do you think a domain expert (for example the Secretary) would understand the model why/why not?
-1. The secretary should be able to understand the model, he/she should be able to deduct what kind of responsibilities he/she have (BoatRegister & Calendar).
+- The secretary should be able to understand the model, he/she should be able to deduct what kind of responsibilities he/she have (BoatRegister & Calendar).
+
 - Have you considered what kind of connection Secretary have with Berth? Like how can he/she know what berths is available? Does the BoatRegister have access to berths or is it perhaps through boats. In that case only the boats "with" a berth is registered in the BoatRegister.
 
 ##### What are the strong points of the model, what do you think is really good and why?
 1. As mention before, the model is pretty detailed and each association has a description that describes the associations well.
-- Multiplicity is optional but included (note: missing for Event-EventDescription).
+
+2. Multiplicity is optional but included (note: missing for Event-EventDescription).
 
 ##### What are the weaknesses of the model, what do you think should be changed and why?
 1. I'm not so sure about the position the description is on (above/under), it took a few moments of thinking to understand it. In this model it's counter-clockwise which is perhaps the correct way but for me, a tiny bit confusing as I tend to think in clockwise direction. In my case i didn't include them but later on I added them when i simplified my model more and yUML didnt really manage them so well :(
 
 ##### Do you think the model has passed the grade 2 (passing grade) criteria?
-1. The model contains the requirements that was needed for the grade so there should be no problems passing.
+- The model contains the requirements that was needed for the grade so there should be no problems passing.
 
 ##### References
 1. Larman C., Applying UML and Patterns 3rd Ed, 2005, ISBN: 0131489062
@@ -46,26 +48,31 @@
  - wk222as	Wictor Kihlbaum	
 
 ##### As a developer would the model help you and why/why not?
- 1. I believe it was not required to add attributes for the classes but I do think it helps with the understanding of the system better, which in turn can be helpful. 
+ - I believe it was not required to add attributes for the classes but I do think it helps with the understanding of the system better, which in turn can be helpful. 
 
 ##### Do you think a domain expert (for example the Secretary) would understand the model why/why not?
-1. The secretary should be able to understand the model, he/she should be able to deduct what kind of responsibilities he/she have (CalendarEvent & Berth).
+- The secretary should be able to understand the model, he/she should be able to deduct what kind of responsibilities he/she have (CalendarEvent & Berth).
 
 ##### What are the strong points of the model, what do you think is really good and why?
-1. Attributes for some classes are set, which gives a bit more indepth.
-- Association multiplicity are being used which gives a better undestanding.
-- The model manages the requirements without being too cluttered.
+1. Attributes for some classes are set, which gives a bit more indepth but optional. Larman (9.16 Attributes)
+
+2. Association multiplicity are being used which gives a better understanding, also optional. Larman (9.14 Associations)
+
+3. The model manages the requirements without being too cluttered.
 
 ##### What are the weaknesses of the model, what do you think should be changed and why?
 1. There could be more consistency on the model regarding use of association multiplicity.
-- Some associations have no names which helps with understanding the model better.
-- It might be because of yUML now that i think of it.
-- According to Larman (9.16 Attributes) the usage of data types. Not necessary go too deep with the attributes. Instead of "type: string" and such go for just "type". Still it's considered OK I believe according to fig 9.24 but notice fig 9.26 usage of money then. Notice fig 9.27 which becomes less cluttered with the more simpler data.
+
+2. Some associations have no names which helps with understanding the model better. Larman (9.14 Associations)
+
+3. It might be because of yUML now that i think of it.
+
+4. According to Larman (9.16 Attributes) the usage of data types. Not necessary go too deep with the attributes. Instead of "type: string" and such go for just "type". Still it's considered OK I believe according to fig 9.24 but notice fig 9.26 usage of money then. Notice fig 9.27 which becomes less cluttered with the more simpler data.
 
 ##### Do you think the model has passed the grade 2 (passing grade) criteria?
 1. There's no reason for the model to not pass, I think.
 - All requirements are met except the #1 Authenticate part which I'm abit confused of.
-- There is some minor details that can be improved a bit but not totallt necessary.
+- There is some minor details that can be improved a bit but not totally necessary.
 
 ##### References
 1. Larman C., Applying UML and Patterns 3rd Ed, 2005, ISBN: 0131489062
