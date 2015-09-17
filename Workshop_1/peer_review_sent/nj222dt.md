@@ -1,5 +1,4 @@
 #### Peer review sent to Niklas Johannesson	(nj222dt)
-
 ![analysis diagram](http://yuml.me/652a5508)
 - Model:
  - http://yuml.me/652a5508
