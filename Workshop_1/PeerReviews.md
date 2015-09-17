@@ -1,12 +1,12 @@
-# Peer Reviews
-## StudentId: dt222cc
-
-### Written to:
-
+## Summery of written and recieved Peer Reviews
+##### Name: Sing Trinh
+##### StudentId: dt222cc
+##### Contact: dt222cc@student.lnu.se
 ------------------------------------------------------
-#### 1
+
+#### Peer review sent to Andréas Anemyr	(aa2223ig)
 - Model:
- - https://github.com/AndreasAnemyrLNU/1dv607/blob/master/WS%201%20-%20Domain%20Modeling.pdf
+ - https://github.com/AndreasAnemyrLNU/1dv607/blob/master/Workshop-1-Domain-Modeling/WS-1-Domain-Modeling-For-Grade-2.pdf
 - Contact:
  - aa223ig@student.lnu.se
 - Members:
@@ -36,10 +36,11 @@
 
 ------------------------------------------------------
 
-#### 2
+#### Peer review sent to Niklas Johannesson	(nj222dt)
+
+![analysis diagram](http://yuml.me/652a5508)
 - Model:
  - http://yuml.me/652a5508
-![analysis diagram](http://yuml.me/652a5508)
 - Contact:
  - nj222dt@student.lnu.se
 - Members:
@@ -77,19 +78,10 @@
 ##### References
 1. Larman C., Applying UML and Patterns 3rd Ed, 2005, ISBN: 0131489062
 
-------------------------------------------------------
-
-### Feedback from:
-
-#### 1
-- Contact:
- - ss223ck@student.lnu.se
-- Members:
- - ss223ck	Sverker Söderlund	
 
 ------------------------------------------------------
 
-#### 2
+#### Peer review recieved from Roy Nilsson (rn222cx)
 - Contact:
  - rn222cx@student.lnu.se
 - Members:
@@ -140,3 +132,11 @@ Yes, we can understand the model, though it may need some changes.
 1. Larman C., Applying UML and Patterns 3rd Ed, 2005, ISBN: 0131489062
 
 2. Ambler, S., The Elements of UML ™ 2.0 Style, 2005, ISBN: 0521616786
+
+------------------------------------------------------
+
+#### Peer review recieved by Sverker Söderlund (ss223ck)
+- Contact:
+ - ss223ck@student.lnu.se
+- Members:
+ - ss223ck	Sverker Söderlund	
