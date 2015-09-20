@@ -1,4 +1,3 @@
-# Folder for Workshop 1.
 ## StudentId: dt222cc
 
 ## Grade 2 (passing grade)
