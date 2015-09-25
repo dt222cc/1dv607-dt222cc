@@ -9,7 +9,7 @@ NavigationView-->>-RegistryController: navigationView
 deactivate RegistryController
 
 note right of RegistryController: 1. View all members (compact)\n2. View all members (verbose)
-RegistryController->+MemberListView: compactList()/verboseList()
+RegistryController->+MemberListView: compactList() or verboseList()
 activate RegistryController
 MemberListView->+MemberList: getMembers()
 MemberList-->>-MemberListView: returnList
