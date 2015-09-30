@@ -8,6 +8,7 @@
 - Got sequence diagrams for all inputs/outputs except edit and delete boat, which is similar to the edit/delete member with the exception of what can be changed.
  - It was only needed to make one input and one output requirement which i clearly missed, so i ended up with too many.
  - Mine is crammed into two separate diagrams.
+ - I have a compact version with return values removed.
 
 ### Requirements for grade 2
 - [Course Page](https://coursepress.lnu.se/kurs/objektorienterad-analys-och-design-med-uml/workshops-2/workshop-2-design/)

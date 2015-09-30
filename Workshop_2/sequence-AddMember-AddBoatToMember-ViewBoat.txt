@@ -1,23 +1,23 @@
 title Sequence: Add member then add boat to member
-note right of User: Every note represent\nthe view above,\nwhich key to press\nand the action from it
-User->+RegistryController: doWork
+note right of User: Every note represent\nthe view from above,\nwhich key to press\nand the action from it
+User->+RegistryController: doWork()
 
-RegistryController->+NavigationView: viewWhatToDo()
+RegistryController->+NavigationView: displayStartMenu()
 activate RegistryController
-NavigationView-->>-RegistryController: navigationView
+NavigationView-->>-RegistryController: startView
 deactivate RegistryController
 
 note right of RegistryController: 3. Add member
 RegistryController->+MemberView: addMember()
 activate RegistryController
 MemberView-->>-RegistryController: memberView
-RegistryController->+MemberList: Member(name, personalNumber)
+RegistryController->+MemberList: addMember(name, personalNumber)
 MemberList->+Member: Member(memberId, name, personalNumber, boats)
 Member-->>-MemberList: true/exception
 MemberList->+MemberList: if true\nsaveMemberList()
 deactivate MemberList
 MemberList-->>-RegistryController: result
-RegistryController->+MemberView: if successful\ngetMemberView(memberId)
+RegistryController->+MemberView: if successful\ndisplayMemberView(memberId)
 MemberView->+MemberList: getMember(memberId)
 MemberList-->>-MemberView: member
 MemberView-->>-RegistryController: memberView
@@ -27,36 +27,34 @@ note right of RegistryController: 4. Add boat
 RegistryController->+BoatView: addBoat()
 activate RegistryController
 BoatView-->>-RegistryController: boatView
-RegistryController->+Member: Boat(type, size)
-Member->+Boat: Boat(type, size)
+RegistryController->+Member: addBoat(type, size)
+Member->+Boat: Boat(type, size, registrationDate)
 Boat-->>-Member: true/exception
 Member->+Member: if true = saveBoat()
 deactivate Member
 Member-->>-RegistryController: result
-RegistryController->+BoatView: if successful = getBoat(boatId)
+RegistryController->+BoatView: if successful\ndisplayBoatView(boatId)
 BoatView->+Member: getBoat(boatId)
 Member-->>-BoatView: boat
 BoatView-->>-RegistryController: boatView
 deactivate RegistryController
 
-note right of RegistryController: 3. Back
-RegistryController->+MemberView: getMemberView(memberId)
+note right of RegistryController: 0. Back
+RegistryController->+MemberView: displayMemberView(memberId)
 activate RegistryController
 MemberView->+MemberList: getMember(memberId)
 MemberList-->>-MemberView: member
 MemberView-->>-RegistryController: memberView
 deactivate RegistryController
 
-note right of RegistryController: 5. Back
-RegistryController->+MemberView: getNavigationView
+note right of RegistryController: 0. Back
+RegistryController->+MemberView: displayStartView
 activate RegistryController
-MemberView-->>-RegistryController: navigationView
+MemberView-->>-RegistryController: startView
 deactivate RegistryController
 
-note right of RegistryController: 4. Exit
+note right of RegistryController: 0. Exit
 RegistryController->+NavigationView: Exit
 activate RegistryController
 NavigationView-->>-RegistryController: Bye!
 deactivate RegistryController
-
-RegistryController->User: Done

@@ -2,14 +2,14 @@ title Sequence: View list to view a member to edit that member's information or 
 
 
 note right of User: Every note represent\nthe view above,\nwhich key to press\nand the action from it
-User->+RegistryController: doWork
-RegistryController->+NavigationView: viewWhatToDo
+User->+RegistryController: doWork()
+RegistryController->+NavigationView: displayStartMenu()
 activate RegistryController
-NavigationView-->>-RegistryController: navigationView
+NavigationView-->>-RegistryController: startView
 deactivate RegistryController
 
 note right of RegistryController: 1. View all members (compact)\n2. View all members (verbose)
-RegistryController->+MemberListView: compactList() or verboseList()
+RegistryController->+MemberListView: displayCompactList() / displayVerboseList()
 activate RegistryController
 MemberListView->+MemberList: getMembers()
 MemberList-->>-MemberListView: returnList
@@ -17,7 +17,7 @@ MemberListView-->>-RegistryController: memberListView
 deactivate RegistryController
 
 note right of RegistryController: (memberId). View member
-RegistryController->+MemberView: viewMember(memberId)
+RegistryController->+MemberView: displayMember(memberId)
 activate RegistryController
 MemberView->+MemberList: getMember(memberId)
 MemberList-->>-MemberView: member
@@ -31,7 +31,7 @@ MemberView-->>RegistryController: memberView
 RegistryController->MemberList: changeName(name)
 MemberList-->>MemberView: exception(validation)
 
-MemberList->+MemberList: saveMemberList
+MemberList->+MemberList: saveMemberList()
 deactivate MemberList
 MemberList-->>MemberView: true/exception
 MemberView-->>-RegistryController: memberView
@@ -49,16 +49,14 @@ MemberList-->>-MemberView: true/exception
 MemberView-->>-RegistryController: memberView
 deactivate RegistryController
 
-note right of RegistryController: 5. Back
-RegistryController->+NavigationView: getNavigationView()
+note right of RegistryController: 0. Back
+RegistryController->+NavigationView: displayStartView()
 activate RegistryController
-NavigationView-->>-RegistryController: navigationView
+NavigationView-->>-RegistryController: startView
 deactivate RegistryController
 
-note right of RegistryController: 4. Exit
-RegistryController->+NavigationView: Exit
+note right of RegistryController: 0. Exit
+RegistryController->+NavigationView: exitApplication()
 activate RegistryController
 NavigationView-->>-RegistryController: Bye!
 deactivate RegistryController
-
-RegistryController->User: Done

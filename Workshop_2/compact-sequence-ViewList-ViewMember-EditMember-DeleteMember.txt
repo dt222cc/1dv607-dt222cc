@@ -1,0 +1,31 @@
+title Sequence: View list to view a member to edit that member's information or delete the member
+
+User->RegistryController: doWork()
+
+RegistryController->StartView: displayStartMenu()
+
+note right of RegistryController: 1. Compact List\n2. Verbose List\n(from StartView)
+RegistryController->MemberListView: compactList() or verboseList()
+MemberListView->MemberList: getMembers()
+
+note right of RegistryController: (memberId). View member\n(from MemberListView)
+RegistryController->MemberView: viewMember(memberId)
+MemberView->MemberList: getMember(memberId)
+
+note right of RegistryController: 1. Edit member \n(from MemberView)
+RegistryController->MemberView: editMember(memberId)
+RegistryController->MemberList: changeName(name)
+MemberList->MemberList: saveMemberList
+
+note right of RegistryController: 2. Delete a member\n(from MemberView)
+RegistryController->MemberView: deleteMember()
+RegistryController->MemberView: false(No)
+RegistryController->MemberView: true(Yes)
+RegistryController->MemberList: true(Yes)
+MemberList->MemberList: deleteMember(memberId)
+
+note right of RegistryController: 0. Back (from MemberListView)
+RegistryController->StartView: displayStartMenu()
+
+note right of RegistryController: 0. Exit (from StartView)
+RegistryController->StartView: exitApplication()
