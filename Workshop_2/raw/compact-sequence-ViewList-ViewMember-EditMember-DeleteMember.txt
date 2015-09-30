@@ -9,7 +9,7 @@ RegistryController->MemberListView: compactList() or verboseList()
 MemberListView->MemberList: getMembers()
 
 note right of RegistryController: (memberId). View member\n(from MemberListView)
-RegistryController->MemberView: viewMember(memberId)
+RegistryController->MemberView: displayMember(memberId)
 MemberView->MemberList: getMember(memberId)
 
 note right of RegistryController: 1. Edit member \n(from MemberView)
