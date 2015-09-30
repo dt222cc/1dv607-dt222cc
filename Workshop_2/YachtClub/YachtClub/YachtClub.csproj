@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="controller\RegistryController.cs" />
     <Compile Include="model\Boat.cs" />
+    <Compile Include="model\BoatType.cs" />
     <Compile Include="model\Member.cs" />
     <Compile Include="model\MemberList.cs" />
     <Compile Include="Program.cs" />
@@ -54,7 +55,7 @@
     <Compile Include="view\InputView.cs" />
     <Compile Include="view\MemberListView.cs" />
     <Compile Include="view\MemberView.cs" />
-    <Compile Include="view\NavigationView.cs" />
+    <Compile Include="view\StartView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
