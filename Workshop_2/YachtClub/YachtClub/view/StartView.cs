@@ -19,7 +19,6 @@ namespace YachtClub.view
 
         private static int _maxKey = 3;
         private static int _minKey = 0;
-        private string _choice;
         private int _keyPressed;
 
         public void DisplayStartMenu()
@@ -46,11 +45,9 @@ namespace YachtClub.view
         {
             do
             {
-                _choice = Console.ReadLine();
-
                 try
                 {
-                    _keyPressed = int.Parse(_choice);
+                    _keyPressed = int.Parse(Console.ReadLine());
 
                     if (_keyPressed < _minKey || _keyPressed > _maxKey)
                     {
@@ -76,7 +73,6 @@ namespace YachtClub.view
                     Console.Write("Enter a number between {0} and {1}.   ", _minKey, _maxKey);
                     Console.ResetColor();
                 }
-
             } while (true);
         }
 
