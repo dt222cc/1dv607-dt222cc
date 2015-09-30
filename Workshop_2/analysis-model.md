@@ -2,7 +2,7 @@
 #### Grade 2 (passing grade)
 
 ## Compact Class Diagram:
-![compact-class-diagram](http://yuml.me/3551e2c9)
+![compact-class-diagram](http://yuml.me/b0155bb2)
 
 -------------------------------------------------
 
@@ -10,4 +10,4 @@
 ![topdown_mvc-class-diagram](http://yuml.me/69dd0da7)
 
 ### Notes:
-- My thoughs behind InputView is the messages for wrong input and such. An class which every views have use of. 
+- I was not sure what scope the Class diagram should be in so I had one centered on Member and Boat with addition of new class MemberList and enum BoatTypes. The second one has MVC in it with inspiration from the other class PHP.
