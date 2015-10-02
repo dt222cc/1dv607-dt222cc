@@ -8,28 +8,49 @@ namespace YachtClub.model
 {
     class MemberList
     {
-        private List<Member> _members = new List<Member>();
+        private List<Member> _members;
+        private MemberListDAL m_DAL = new MemberListDAL();
 
+        // return list as readonly
         public IEnumerable<Member> Members
         {
-            get { return _members; }
+            get
+            {
+                return _members;
+            }
         }
 
         public MemberList()
         {
-            //TODO: MemberListDAL or MemberDAL
-            //Perhaps one file where member have one row each with memberdetails and boats.
-            //a special line/row for keeping up with total registrations made which can be used for generating the memberId.
+            _members = m_DAL.GetAll();
         }
 
-        // Need some list to work with
-        public bool MemberExists(int memberId)
+        public void AddMember(Member memberToRegister)
         {
-            //throw new NotImplementedException();
-            if (memberId == 1) {
-                return true;
+            foreach (Member m in _members)
+            {
+                if (m.PersonalNumber == memberToRegister.PersonalNumber)
+                {
+                    throw new ArgumentException("Member already exists.");
+                }
             }
-            return false;
+            _members.Add(memberToRegister);
+            m_DAL.Save();
+
+            Console.WriteLine("Passed Save()");
+        }
+
+        public Member GetMemberById(int memberId)
+        {
+            foreach(Member m in _members)
+            {
+                if (m.MemberId == memberId)
+                {
+                    return m;
+                }
+            }
+            return null;
+            //throw new ArgumentException("Member does not exists."); // Trying out different ways of error handeling
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace YachtClub.view
 {
-    class StartView
+    class StartView: InputView
     {
         // The startmenu has these choices
         public enum Choices
@@ -16,28 +16,22 @@ namespace YachtClub.view
             ListMembersVerbose,
             AddMember
         };
+        private const string _appName = "Happy YachtClub";
 
-        private static int _maxKey = 3;
-        private static int _minKey = 0;
-        private int _keyPressed;
+        private const int _maxKey = 3;
+        private const int _minKey = 0;
 
         public void DisplayStartMenu()
         {
             Console.Clear();
-            Console.BackgroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine("===================================");
-            Console.WriteLine("          Happy YachtClub          ");
-            Console.WriteLine("===================================\n");
-            Console.ResetColor();
+            RenderWindow("          " + _appName + "          ");
+            
             Console.WriteLine(" 0. Exit                           ");
             Console.WriteLine(" 1. Show members in a compact view ");
             Console.WriteLine(" 2. Show members in a verbose view ");
-            Console.WriteLine(" 3. Add a new user                 ");
-            Console.BackgroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine("\n===================================");
-            Console.WriteLine("      Enter menu choice [{0}-{1}]      ", _minKey, _maxKey);
-            Console.WriteLine("===================================\n");
-            Console.ResetColor();
+            Console.WriteLine(" 3. Add a new user                 \n");
+
+            RenderWindow("      Enter menu choice [" + _minKey + "-" + _maxKey + "]      ");
         }
         
         // Get the startmenu choice from user, must be integer and within the allowed parameters
@@ -47,14 +41,15 @@ namespace YachtClub.view
             {
                 try
                 {
-                    _keyPressed = int.Parse(Console.ReadLine());
+                    Console.Write("Input:  ");
+                    int keyPressed = int.Parse(Console.ReadLine());
 
-                    if (_keyPressed < _minKey || _keyPressed > _maxKey)
+                    if (keyPressed < _minKey || keyPressed > _maxKey)
                     {
-                        throw new Exception();
+                        throw new ArgumentOutOfRangeException();
                     }
 
-                    switch (_keyPressed)
+                    switch (keyPressed)
                     {
                         case 0:
                             return Choices.ExitApplication;
@@ -70,10 +65,23 @@ namespace YachtClub.view
                 {
                     DisplayStartMenu();
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write("Enter a number between {0} and {1}.   ", _minKey, _maxKey);
+                    Console.Write("Enter a number between {0} and {1}.\n\n", _minKey, _maxKey);
                     Console.ResetColor();
                 }
             } while (true);
+        }
+
+        public void DisplayRegistration(string errorMessage = "")
+        {
+            Console.Clear();
+            string content = "        Member registration        ";
+            RenderWindow(content);
+
+            if (errorMessage != "") {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("{0}\n", errorMessage);
+                Console.ResetColor();
+            }
         }
 
         public void GetByeMessage()

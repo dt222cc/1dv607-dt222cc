@@ -40,15 +40,15 @@ namespace YachtClub.model
             }
         }
 
-        // Simplified for the moment, just need to be 12 in length.
+        // Simplified for faster testing, just need to be between 1 and 12 in length. Future: Regex
         public string PersonalNumber
         {
             get { return _personalNumber; }
             set
             {
-                if (value.Length != 12)
+                if (value.Length > 12) //TODO
                 {
-                    throw new ArgumentException("PersonalNumber/BirthDate is not in a valid format.");
+                    throw new ArgumentException("PersonalNumber/BirthDate is not in a valid format [yyyymmdduuuu].");
                 }
                 _personalNumber = value;
             }
@@ -64,6 +64,20 @@ namespace YachtClub.model
             MemberId = memberId;
             Name = name;
             PersonalNumber = personalNumber;
+        }
+
+        public void AddBoat(Boat boatToRegister)
+        {
+            foreach (Boat boat in _boats)
+            {
+                if (boat.Type == boatToRegister.Type &&
+                    boat.Length == boatToRegister.Length &&
+                    boat.RegistrationDate == boatToRegister.RegistrationDate)
+                {
+                    throw new ArgumentException("Boat is already registered.");
+                }
+            }
+            _boats.Add(boatToRegister);
         }
     }
 }

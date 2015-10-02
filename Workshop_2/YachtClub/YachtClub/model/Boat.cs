@@ -16,8 +16,8 @@ namespace YachtClub.model
         //    Other
         //}
 
-        private double _length;
         private BoatType _type;
+        private double _length;
         private DateTime _registrationDate;
 
         public BoatType Type
@@ -38,11 +38,11 @@ namespace YachtClub.model
                 _length = value;
             }
         }
-        // Not sure if this works, i'll get to it later when working with boats
+        // Not sure if this works (date), i'll get to it later when working with boats
         public DateTime RegistrationDate
         {
             get { return _registrationDate; }
-            set { _registrationDate = DateTime.Today; }
+            set { _registrationDate = value; }
         }
 
         public Boat(BoatType type, double length, DateTime registrationDate)

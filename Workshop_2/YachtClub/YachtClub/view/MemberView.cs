@@ -6,22 +6,24 @@ using System.Threading.Tasks;
 
 namespace YachtClub.view
 {
-    class MemberView
+    class MemberView: InputView
     {
-        public MemberView()
-        {
+        private model.Member _member;
 
+        public MemberView(model.Member member)
+        {
+            _member = member;
         }
 
-        public void DisplayMember(int memberId)
+        public void DisplayMember()
         {
-            //Retrieve member details from member object
             Console.Clear();
-            Console.BackgroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine("===================================");
-            Console.WriteLine("             MemberView            ");
-            Console.WriteLine("===================================\n");
-            Console.ResetColor();
+            string content = "          Member details           ";
+            RenderWindow(content);
+
+            Console.WriteLine("MemberId        : {0}", _member.MemberId);
+            Console.WriteLine("Name            : {0}", _member.Name);
+            Console.WriteLine("Personal number : {0}\n", _member.PersonalNumber);
         }
     }
 }

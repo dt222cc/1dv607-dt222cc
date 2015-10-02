@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace YachtClub.view
 {
-    class MemberListView
+    class MemberListView: InputView
     {
         public enum Choices
         {
@@ -17,7 +17,6 @@ namespace YachtClub.view
         private string _header;
         private int _keyPressed;
         private bool _pickedCompactList;
-        private bool _result;
 
         private model.MemberList _memberList;
 
@@ -29,23 +28,27 @@ namespace YachtClub.view
         public void DisplayMemberListView(bool pickedCompactList)
         {
             _pickedCompactList = pickedCompactList;
-            if (_pickedCompactList == true) 
-                { _header = "Compact View"; }
+            if (pickedCompactList == true)
+            {
+                _header = "            Compact View           ";
+            }
             else
-                { _header = "Verbose View"; }
+            { 
+                _header = "            Verbose View           ";
+            }
 
             Console.Clear();
-            Console.BackgroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine("===================================");
-            Console.WriteLine("            {0}           ", _header);
-            Console.WriteLine("===================================\n");
-            Console.ResetColor();
+            RenderWindow(_header);
             Console.WriteLine(" 0. Exit                           ");
 
-            if (_pickedCompactList == true)
-                { DisplayCompactList(); }
+            if (pickedCompactList == true)
+            {
+                DisplayCompactList();
+            }
             else
-                { DisplayVerboseList(); }
+            {
+                DisplayVerboseList();
+            }
 
             Console.BackgroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("\n===================================");
@@ -57,22 +60,22 @@ namespace YachtClub.view
         // TODO: Work on the forloop, retrieving the memberslist from a file (work on format)
         private void DisplayCompactList()
         {
-            //placeholders
-            Console.WriteLine(" 1. Sing Trinh, Boats: 1");
-            Console.WriteLine(" 4. Kaaaaaaa Boo, Boats: 2");
+            ////placeholders
+            //Console.WriteLine(" 1. Sing Trinh, Boats: 1");
+            //Console.WriteLine(" 4. Kaaaaaaa Boo, Boats: 2");
         }
 
         private void DisplayVerboseList()
         {
             //placeholders
-            Console.WriteLine(" 1. Sing Trinh, 199302271078");
-            Console.WriteLine("   - Canoe, 2 m, 2015-10-01");
-            Console.WriteLine(" 4. Kaaaaaaa Boo, 199302020101");
-            Console.WriteLine("   - Motorsailer, 10 m, 2015-10-02");
-            Console.WriteLine("   - Other, 3 m, 2015-10-03");
+            //Console.WriteLine(" 1. Sing Trinh, 199302271078");
+            //Console.WriteLine("   - Canoe, 2 m, 2015-10-01");
+            //Console.WriteLine(" 4. Kaaaaaaa Boo, 199302020101");
+            //Console.WriteLine("   - Motorsailer, 10 m, 2015-10-02");
+            //Console.WriteLine("   - Other, 3 m, 2015-10-03");
         }
 
-        //Loop until a valid input was made, 0 or valid memberId
+        //Loop until a valid input was made, number
         public int GetUserInput()
         {
             do
@@ -87,14 +90,11 @@ namespace YachtClub.view
                     }
                     else
                     {
-                        if (_memberList.MemberExists(_keyPressed))
-                        {
-                            return _keyPressed;
-                        }
-                        else
+                        if (_memberList.GetMemberById(_keyPressed) == null)
                         {
                             throw new Exception();
                         }
+                        return _keyPressed;
                     }
                 }
                 catch
