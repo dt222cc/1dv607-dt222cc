@@ -18,7 +18,7 @@ namespace YachtClub.view
         }
 
         //Might remove this method(no need to input memberid, low prio)
-        public int GetIntegerFromUser(string prompt)
+        public int GetIntegerFromUser(string prompt = "")
         {
             Console.Write(prompt);
             try
@@ -31,7 +31,7 @@ namespace YachtClub.view
             }
         }
 
-        public string GetStringFromUser(string prompt)
+        public string GetStringFromUser(string prompt = "")
         {
             Console.Write(prompt);
             return Console.ReadLine();
@@ -43,7 +43,7 @@ namespace YachtClub.view
             do
             {
                 string input = Console.ReadLine().ToLower();
-                if (input == "y")
+                if (input == "y" || input == "")
                 {
                     return false;
                 }

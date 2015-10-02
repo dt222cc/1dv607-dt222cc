@@ -36,6 +36,10 @@ namespace YachtClub.model
                 {
                     throw new ArgumentException("Name has too few characters, at least 2 characters.");
                 }
+                else if (value.Length > 20)
+                {
+                    throw new ArgumentException("Name has too many characters, maximum of 20 characters.");
+                }
                 _name = value;
             }
         }

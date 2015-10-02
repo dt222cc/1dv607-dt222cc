@@ -1,0 +1,7 @@
+[Member];4568;dasdAS;dasdasd5;
+[Member];45;Sing;1993;
+[Boat];Sailboat;15;2015-01-02;
+[Boat];Motorsailer;10;2015-05-15;
+[Boat];Canoe;2;01-02-2015;
+[Member];12;sdasd;516;
+[Boat];Canoe;2;01-02-2015;

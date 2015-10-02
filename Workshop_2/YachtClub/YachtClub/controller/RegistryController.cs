@@ -42,7 +42,7 @@ namespace YachtClub.controller
             }
         }
 
-        // Render MemberListView (compact or verbose view), get user input from the memberlistview
+        // Render MemberListView (compact or verbose view), get user input to view member or go back
         private void DisplayMemberList(bool pickedCompactList)
         {
             try
@@ -56,7 +56,10 @@ namespace YachtClub.controller
                 {
                     DoWork();
                 }
-                DisplayMember(_list.GetMemberById(memberId));
+                else
+                {
+                    DisplayMember(_list.GetMemberById(memberId));
+                }
             }
             catch (Exception ex)
             {
@@ -90,7 +93,10 @@ namespace YachtClub.controller
                 if (_startView.DoesUserWantsToQuit() == true) {
                     DoWork();
                 }
-                AddMember();
+                else
+                {
+                    AddMember();
+                }
             }
         }
 
@@ -99,6 +105,8 @@ namespace YachtClub.controller
         {
             _memberView = new view.MemberView(member);
             _memberView.DisplayMember();
+
+            DoWork();
         }
     }
 }

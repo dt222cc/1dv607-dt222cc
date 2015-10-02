@@ -41,7 +41,7 @@ namespace YachtClub.view
             {
                 try
                 {
-                    Console.Write("Input:  ");
+                    Console.Write("Input: ");
                     int keyPressed = int.Parse(Console.ReadLine());
 
                     if (keyPressed < _minKey || keyPressed > _maxKey)

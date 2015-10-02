@@ -8,10 +8,9 @@ namespace YachtClub.model
 {
     class MemberList
     {
-        private List<Member> _members;
+        private List<Member> _members = new List<Member>();
         private MemberListDAL m_DAL = new MemberListDAL();
 
-        // return list as readonly, (for memberlistview) /not tested 
         public IEnumerable<Member> Members
         {
             get
@@ -33,13 +32,13 @@ namespace YachtClub.model
                 {
                     throw new ArgumentException("A member with specified personal number already exists.");
                 }
-                else if (m.MemberId == m.MemberId)
+                else if (m.MemberId == memberToRegister.MemberId)
                 {
                     throw new ArgumentException("A member with specified memberId already exists.");
                 }
             }
             _members.Add(memberToRegister);
-            SaveMemberList();
+            m_DAL.Save();
         }
 
         public Member GetMemberById(int memberId)
@@ -52,23 +51,6 @@ namespace YachtClub.model
                 }
             }
             throw new ArgumentException("Member does not exists.");
-        }
-
-        public bool DoesMemberExist(int memberId)
-        {
-            foreach (Member m in _members)
-            {
-                if (m.MemberId == memberId)
-                {
-                    return true;
-                }
-            }
-            throw new ArgumentException("Member does not exists.");
-        }
-
-        public void SaveMemberList()
-        {
-            m_DAL.Save();
         }
     }
 }

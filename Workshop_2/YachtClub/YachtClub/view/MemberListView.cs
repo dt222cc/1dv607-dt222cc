@@ -8,71 +8,63 @@ namespace YachtClub.view
 {
     class MemberListView: InputView
     {
-        public enum Choices
-        {
-            GoBack,
-            ViewMember
-        };
-
-        private string _header;
-        private int _keyPressed;
         private bool _pickedCompactList;
 
-        private model.MemberList _memberList;
+        private model.MemberList _list;
 
         public MemberListView(model.MemberList memberList)
         {
-            _memberList = memberList;
+            _list = memberList;
         }
 
         public void DisplayMemberListView(bool pickedCompactList)
         {
+            Console.Clear();
             _pickedCompactList = pickedCompactList;
             if (pickedCompactList == true)
             {
-                _header = "            Compact View           ";
+                RenderWindow("            Compact View           ");
             }
             else
             { 
-                _header = "            Verbose View           ";
+                RenderWindow("            Verbose View           ");
             }
-
-            Console.Clear();
-            RenderWindow(_header);
-            Console.WriteLine(" 0. Exit                           ");
+            Console.WriteLine(" 0    Exit");
 
             if (pickedCompactList == true)
             {
-                DisplayCompactList();
+                Console.WriteLine("-----------------------------------");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine(" {0,-4} {1,-20} {2,7}", "Id", "Name", "Boats");
+                Console.ResetColor();
+
+                foreach (model.Member m in _list.Members)
+                {
+                    Console.WriteLine(" {0,-4} {1,-20} {2,5}", m.MemberId, m.Name, m.Boats.Count());
+                }
             }
             else
             {
-                DisplayVerboseList();
-            }
+                foreach (model.Member m in _list.Members)
+                {
+                    Console.WriteLine("-----------------------------------");
+                    Console.WriteLine(" {0,-4} {1,-16} {2,12}", m.MemberId, m.Name, m.PersonalNumber);
+                    if (m.Boats.Count() >= 1)
+                    {
+                        Console.WriteLine("      -----------------------------");
+                    }
+                    foreach (model.Boat b in m.Boats)
+                    {
+                        Console.WriteLine("      {0,-12}{1,5}{2,12:d}", b.Type, b.Length + "m", b.RegistrationDate);
+                    }
+                }
 
+            }
             Console.BackgroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("\n===================================");
             Console.WriteLine("       Enter memberId to view      ");
             Console.WriteLine("===================================\n");
             Console.ResetColor();
-        }
-
-        // TODO: Work on the forloop, retrieving the memberslist from a file (work on format)
-        private void DisplayCompactList()
-        {
-            ////placeholders
-            //Console.WriteLine(" 1. Sing Trinh, Boats: 1");
-            //Console.WriteLine(" 4. Kaaaaaaa Boo, Boats: 2");
-        }
-
-        private void DisplayVerboseList()
-        {
-            //placeholders
-            //Console.WriteLine(" 1. Sing Trinh, 199302271078");
-            //Console.WriteLine("   - Canoe, 2 m, 2015-10-01");
-            //Console.WriteLine(" 4. Kaaaaaaa Boo, 199302020101");
-            //Console.WriteLine("   - Motorsailer, 10 m, 2015-10-02");
-            //Console.WriteLine("   - Other, 3 m, 2015-10-03");
         }
 
         //Loop until a valid input was made, number
@@ -82,34 +74,42 @@ namespace YachtClub.view
             {
                 try
                 {
-                    _keyPressed = int.Parse(Console.ReadLine());
+                    Console.Write("Input: ");
+                    int keyPressed = int.Parse(Console.ReadLine());
 
-                    if (DoesUserWantsToQuit(_keyPressed))
+                    if (DoesUserWantsToQuit(keyPressed) == true)
                     {
-                        return _keyPressed;
+                        return keyPressed;
                     }
                     else
                     {
-                        if (_memberList.DoesMemberExist(_keyPressed) == true)
-                        {
-                            throw new Exception();
-                        }
-                        return _keyPressed;
+                        var result = _list.GetMemberById(keyPressed); //Catch ArgumentException
+                        return keyPressed; // memberId
                     }
+                }
+                catch(ArgumentException ex)
+                {
+                    DisplayErrorMessage(ex.Message);
                 }
                 catch
                 {
-                    DisplayMemberListView(_pickedCompactList);
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write("Enter a valid memberId.   ");
-                    Console.ResetColor();
+                    DisplayErrorMessage("Enter a valid memberId.");
                 }
             } while (true);
         }
 
+        public void DisplayErrorMessage(string message)
+        {
+            DisplayMemberListView(_pickedCompactList);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("{0}    ", message);
+            Console.ResetColor();
+        }
+
         private bool DoesUserWantsToQuit(int keyPressed)
         {
-            if (keyPressed == 0) {
+            if (keyPressed == 0)
+            {
                 return true;
             }
             return false;
