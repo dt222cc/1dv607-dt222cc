@@ -27,7 +27,7 @@ namespace YachtClub.view
             }
             catch
             {
-                return 0;
+                return 0; // force invalid memberid 0 if input cannot be parsed as int
             }
         }
 

@@ -54,6 +54,7 @@ namespace YachtClub.model
             }
         }
 
+        // Not tested
         public IEnumerable<Boat> Boats
         {
             get { return _boats.AsEnumerable(); }
@@ -66,6 +67,7 @@ namespace YachtClub.model
             PersonalNumber = personalNumber;
         }
 
+        // Not tested
         public void AddBoat(Boat boatToRegister)
         {
             foreach (Boat boat in _boats)

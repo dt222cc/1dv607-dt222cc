@@ -93,6 +93,7 @@ namespace YachtClub.model
                 // 4. Sort the list of members by the id. 
                 // 5. Assign the appropriate fields in the class, _members, a reference to the list.
                 _members = members.OrderBy(r => r.MemberId).ToList();
+                //_members = members;
             }
             catch (Exception ex)
             {
@@ -115,9 +116,9 @@ namespace YachtClub.model
                         // Writes a line with a format for member details, divided with a semicolon
                         writer.WriteLine(m.MemberId + ";" + m.Name + ";" + m.PersonalNumber + ";");
                         // Writes a line for the boats section with similar format
-                        writer.Write(_sectionBoat);
                         foreach (Boat b in m.Boats)
                         {
+                            writer.Write(_sectionBoat);
                             writer.WriteLine(b.Type + ";" + b.Length + ";" + b.RegistrationDate + ";");
                         }
                     }

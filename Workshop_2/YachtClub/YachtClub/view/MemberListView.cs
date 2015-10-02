@@ -90,7 +90,7 @@ namespace YachtClub.view
                     }
                     else
                     {
-                        if (_memberList.GetMemberById(_keyPressed) == null)
+                        if (_memberList.DoesMemberExist(_keyPressed) == true)
                         {
                             throw new Exception();
                         }

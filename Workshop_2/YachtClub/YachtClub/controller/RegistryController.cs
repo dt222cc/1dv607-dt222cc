@@ -16,12 +16,11 @@ namespace YachtClub.controller
         public RegistryController()
         {
             _startView = new view.StartView();
-            // Dependency injection
             _list = new model.MemberList();
             _listView = new view.MemberListView(_list);
         }
 
-        // Render the StartMenu and get/do what user wants to do.
+        // Render the StartMenu and get/do what user wants to do. Note: thinking of a name change
         public void DoWork()
         {
             _startView.DisplayStartMenu();
@@ -46,16 +45,23 @@ namespace YachtClub.controller
         // Render MemberListView (compact or verbose view), get user input from the memberlistview
         private void DisplayMemberList(bool pickedCompactList)
         {
-            _listView.DisplayMemberListView(pickedCompactList);
-
-            //DisplayMember();
-            int memberId = _listView.GetUserInput();
-            if (memberId == 0)
+            try
             {
-                DoWork();
+                // Display the ListView
+                _listView.DisplayMemberListView(pickedCompactList);
+
+                // Get user input (display memberId or go back)
+                int memberId = _listView.GetUserInput();
+                if (memberId == 0)
+                {
+                    DoWork();
+                }
+                DisplayMember(_list.GetMemberById(memberId));
             }
-            model.Member member = _list.GetMemberById(memberId);
-            DisplayMember(member);
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         // Try to create and add a new member to the list
@@ -69,10 +75,11 @@ namespace YachtClub.controller
                 int memberId = _startView.GetIntegerFromUser("MemberId       : "); //need to think of a way to skip memberId input
                 string name = _startView.GetStringFromUser("Name           : ");
                 string personalNumber = _startView.GetStringFromUser("Personal number: ");
-                model.Member member = new model.Member(memberId, name, personalNumber);
+                // Try to create a member with valid "or" invalid data
+                model.Member member = new model.Member(memberId, name, personalNumber); //throws exception if fail
 
-                // Add member to the list of members
                 _list.AddMember(member);
+
                 // Go to that members view after a successful registration
                 DisplayMember(member);
             }
@@ -83,13 +90,11 @@ namespace YachtClub.controller
                 if (_startView.DoesUserWantsToQuit() == true) {
                     DoWork();
                 }
-                else
-                {
-                    AddMember();
-                }
+                AddMember();
             }
         }
 
+        // Render MemberView with specified Member / TODO Expand?
         public void DisplayMember(model.Member member)
         {
             _memberView = new view.MemberView(member);

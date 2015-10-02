@@ -11,7 +11,7 @@ namespace YachtClub.model
         private List<Member> _members;
         private MemberListDAL m_DAL = new MemberListDAL();
 
-        // return list as readonly
+        // return list as readonly, (for memberlistview) /not tested 
         public IEnumerable<Member> Members
         {
             get
@@ -31,13 +31,15 @@ namespace YachtClub.model
             {
                 if (m.PersonalNumber == memberToRegister.PersonalNumber)
                 {
-                    throw new ArgumentException("Member already exists.");
+                    throw new ArgumentException("A member with specified personal number already exists.");
+                }
+                else if (m.MemberId == m.MemberId)
+                {
+                    throw new ArgumentException("A member with specified memberId already exists.");
                 }
             }
             _members.Add(memberToRegister);
-            m_DAL.Save();
-
-            Console.WriteLine("Passed Save()");
+            SaveMemberList();
         }
 
         public Member GetMemberById(int memberId)
@@ -49,8 +51,24 @@ namespace YachtClub.model
                     return m;
                 }
             }
-            return null;
-            //throw new ArgumentException("Member does not exists."); // Trying out different ways of error handeling
+            throw new ArgumentException("Member does not exists.");
+        }
+
+        public bool DoesMemberExist(int memberId)
+        {
+            foreach (Member m in _members)
+            {
+                if (m.MemberId == memberId)
+                {
+                    return true;
+                }
+            }
+            throw new ArgumentException("Member does not exists.");
+        }
+
+        public void SaveMemberList()
+        {
+            m_DAL.Save();
         }
     }
 }

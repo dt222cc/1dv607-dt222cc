@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace YachtClub.model
 {
+    // This whole class is not tested yet
     class Boat
     {
         //public enum BoatType
