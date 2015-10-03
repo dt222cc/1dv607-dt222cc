@@ -10,6 +10,7 @@ namespace YachtClub.view
     {
         public void RenderWindow(string content)
         {
+            Console.Clear();
             Console.BackgroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("===================================");
             Console.WriteLine(content);
@@ -23,24 +24,22 @@ namespace YachtClub.view
             Console.Write(" Enter menu choice [{0}-{1}] : ", min, max);
         }
 
-        //Might remove this method(no need to input memberid, low prio)
-        public int GetIntegerFromUser(string prompt = "")
+        public void DisplayMemberRegistration(bool displayMember)
         {
-            Console.Write(prompt);
-            try
-            {
-                return int.Parse(Console.ReadLine());
+            if (displayMember == true) {
+                RenderWindow("        Member registration        ");
             }
-            catch
+            else
             {
-                return 0; // force invalid memberid 0 if input cannot be parsed as int
+                RenderWindow("         Boat registration         ");
             }
         }
 
-        public string GetStringFromUser(string prompt = "")
+        public void DisplayErrorMessage(string errorMessage)
         {
-            Console.Write(prompt);
-            return Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("{0}\n", errorMessage);
+            Console.ResetColor();
         }
 
         public int GetMenuChoiceFromUser(int min, int max)
@@ -51,6 +50,23 @@ namespace YachtClub.view
                 throw new ArgumentOutOfRangeException();
             }
             return keyPressed;
+        }
+
+        public bool DoesUserWantsToQuit()
+        {
+            Console.Write("Do you want to try again? (y/n)  : ");
+            do
+            {
+                string input = Console.ReadLine().ToLower();
+                if (input == "y" || input == "")
+                {
+                    return false;
+                }
+                else if (input == "n")
+                {
+                    return true;
+                }
+            } while (true);
         }
     }
 }

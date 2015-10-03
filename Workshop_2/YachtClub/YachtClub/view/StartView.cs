@@ -22,7 +22,6 @@ namespace YachtClub.view
 
         public void DisplayStartMenu()
         {
-            Console.Clear();
             RenderWindow("          Happy YachtClub          ");
             Console.WriteLine(" 0. Exit                           ");
             Console.WriteLine(" 1. Show members in a compact view ");
@@ -58,40 +57,37 @@ namespace YachtClub.view
             } while (true);
         }
 
-        public void DisplayRegistration(string errorMessage = "")
+        //Might remove this method(no need to input memberid)
+        public int GetMemberIdFromUser()
         {
-            Console.Clear();
-            string content = "        Member registration        ";
-            RenderWindow(content);
-
-            if (errorMessage != "") {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("{0}\n", errorMessage);
-                Console.ResetColor();
+            Console.Write("MemberId       : ");
+            try
+            {
+                return int.Parse(Console.ReadLine());
+            }
+            catch
+            {
+                return 0;
             }
         }
 
-        public bool DoesUserWantsToQuit()
+        public string GetStringFromUser(bool isName)
         {
-            Console.Write("Do you want to try again? (y/n)  : ");
-            do
+            if (isName == true)
             {
-                string input = Console.ReadLine().ToLower();
-                if (input == "y" || input == "")
-                {
-                    return false;
-                }
-                else if (input == "n")
-                {
-                    return true;
-                }
-            } while (true);
+                Console.Write("Name           : ");
+            }
+            else
+            {
+                Console.Write("Personal number: ");
+            }
+            return Console.ReadLine();
         }
 
         public void GetByeMessage()
         {
             DisplayStartMenu();
-            Console.Write("\n Goodbye! ");
+            Console.Write("\n\n Goodbye! ");
         }
     }
 }

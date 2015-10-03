@@ -19,7 +19,6 @@ namespace YachtClub.view
 
         public void DisplayMemberListView(bool pickedCompactList, string message = "Enter memberId to view")
         {
-            Console.Clear();
             _pickedCompactList = pickedCompactList;
             if (pickedCompactList == true)
             {

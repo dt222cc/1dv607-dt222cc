@@ -75,16 +75,21 @@ namespace YachtClub.model
 
         public void AddBoat(Boat boatToRegister)
         {
-            foreach (Boat boat in _boats)
+            foreach (Boat b in _boats)
             {
-                if (boat.Type == boatToRegister.Type &&
-                    boat.Length == boatToRegister.Length &&
-                    boat.RegistrationDate == boatToRegister.RegistrationDate)
+                if (b.Type == boatToRegister.Type &&
+                    b.Length == boatToRegister.Length &&
+                    b.RegistrationDate == boatToRegister.RegistrationDate)
                 {
                     throw new ArgumentException("Boat is already registered");
                 }
             }
             _boats.Add(boatToRegister);
+        }
+
+        public void ChangeName(string newName)
+        {
+            _name = newName;
         }
     }
 }

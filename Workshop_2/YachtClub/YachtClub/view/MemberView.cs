@@ -22,16 +22,11 @@ namespace YachtClub.view
 
         private model.Member _member;
 
-        public MemberView(model.Member member)
+        public void DisplayMember(model.Member member)
         {
             _member = member;
-        }
-
-        public void DisplayMember()
-        {
             if (_member != null)
             {
-                Console.Clear();
                 RenderWindow("          Member details           ");
                 Console.WriteLine(" MemberId        : {0}", _member.MemberId);
                 Console.WriteLine(" Name            : {0}", _member.Name);
@@ -69,6 +64,7 @@ namespace YachtClub.view
                 RenderChoices(_minKey, _maxKey);
             }
         }
+
         public MemberOperation GetMemberOperation()
         {
             do
@@ -92,9 +88,23 @@ namespace YachtClub.view
                 }
                 catch
                 {
-                    DisplayMember();
+                    DisplayMember(_member);
                 }
             } while (true);
+        }
+
+        public string ChangeName(string errorMessage = "")
+        {
+            RenderWindow("       Edit member details        ");
+            if (errorMessage != "")
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("{0}\n", errorMessage);
+                Console.ResetColor();
+            }
+
+            Console.Write(" New name: ");
+            return Console.ReadLine();
         }
     }
 }

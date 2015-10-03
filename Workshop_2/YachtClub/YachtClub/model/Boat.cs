@@ -42,7 +42,7 @@ namespace YachtClub.model
         public DateTime RegistrationDate
         {
             get { return _registrationDate; }
-            set { _registrationDate = value; }
+            set { _registrationDate = value.Date; }
         }
 
         public Boat(BoatType type, double length, DateTime registrationDate)

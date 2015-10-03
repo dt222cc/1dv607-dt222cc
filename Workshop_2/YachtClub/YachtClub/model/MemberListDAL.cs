@@ -68,7 +68,6 @@ namespace YachtClub.model
                     }
                 }
                 _members = members.OrderBy(r => r.MemberId).ToList();
-                //_members = members;
             }
             catch (Exception ex)
             {

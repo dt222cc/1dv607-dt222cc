@@ -9,7 +9,7 @@ namespace YachtClub.model
     class MemberList
     {
         private List<Member> _members = new List<Member>();
-        private MemberListDAL m_DAL = new MemberListDAL();
+        private MemberListDAL _mDAL = new MemberListDAL();
 
         public IEnumerable<Member> Members
         {
@@ -21,7 +21,7 @@ namespace YachtClub.model
 
         public MemberList()
         {
-            _members = m_DAL.GetAll();
+            _members = _mDAL.GetAll();
         }
 
         public void AddMember(Member memberToRegister)
@@ -38,7 +38,6 @@ namespace YachtClub.model
                 }
             }
             _members.Add(memberToRegister);
-            m_DAL.Save();
         }
 
         public Member GetMemberById(int memberId)
@@ -51,7 +50,11 @@ namespace YachtClub.model
                 }
             }
             return null;
-            //throw new ArgumentException("Member does not exists");
+        }
+
+        public void SaveMemberList()
+        {
+            _mDAL.Save();
         }
     }
 }
