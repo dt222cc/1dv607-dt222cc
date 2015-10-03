@@ -9,14 +9,13 @@ namespace YachtClub.view
     class StartView: InputView
     {
         // The startmenu has these choices
-        public enum Choices
+        public enum StartMenuOperation
         {
             ExitApplication,
             ListMembersCompact,
             ListMembersVerbose,
             AddMember
         };
-        private const string _appName = "Happy YachtClub";
 
         private const int _maxKey = 3;
         private const int _minKey = 0;
@@ -24,49 +23,37 @@ namespace YachtClub.view
         public void DisplayStartMenu()
         {
             Console.Clear();
-            RenderWindow("          " + _appName + "          ");
-            
+            RenderWindow("          Happy YachtClub          ");
             Console.WriteLine(" 0. Exit                           ");
             Console.WriteLine(" 1. Show members in a compact view ");
             Console.WriteLine(" 2. Show members in a verbose view ");
             Console.WriteLine(" 3. Add a new user                 \n");
-
-            RenderWindow("      Enter menu choice [" + _minKey + "-" + _maxKey + "]      ");
+            RenderChoices(_minKey, _maxKey);
         }
         
         // Get the startmenu choice from user, must be integer and within the allowed parameters
-        public Choices GetStartMenuChoice()
+        public StartMenuOperation GetStartMenuChoice()
         {
             do
             {
                 try
                 {
-                    Console.Write("Input: ");
-                    int keyPressed = int.Parse(Console.ReadLine());
-
-                    if (keyPressed < _minKey || keyPressed > _maxKey)
-                    {
-                        throw new ArgumentOutOfRangeException();
-                    }
-
+                    int keyPressed = GetMenuChoiceFromUser(_minKey, _maxKey);
                     switch (keyPressed)
                     {
                         case 0:
-                            return Choices.ExitApplication;
+                            return StartMenuOperation.ExitApplication;
                         case 1:
-                            return Choices.ListMembersCompact;
+                            return StartMenuOperation.ListMembersCompact;
                         case 2:
-                            return Choices.ListMembersVerbose;
+                            return StartMenuOperation.ListMembersVerbose;
                         case 3:
-                            return Choices.AddMember;
+                            return StartMenuOperation.AddMember;
                     }
                 }
                 catch
                 {
                     DisplayStartMenu();
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.Write("Enter a number between {0} and {1}.\n\n", _minKey, _maxKey);
-                    Console.ResetColor();
                 }
             } while (true);
         }
@@ -84,10 +71,27 @@ namespace YachtClub.view
             }
         }
 
+        public bool DoesUserWantsToQuit()
+        {
+            Console.Write("Do you want to try again? (y/n)  : ");
+            do
+            {
+                string input = Console.ReadLine().ToLower();
+                if (input == "y" || input == "")
+                {
+                    return false;
+                }
+                else if (input == "n")
+                {
+                    return true;
+                }
+            } while (true);
+        }
+
         public void GetByeMessage()
         {
             DisplayStartMenu();
-            Console.Write("Goodbye! ");
+            Console.Write("\n Goodbye! ");
         }
     }
 }

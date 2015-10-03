@@ -6,16 +6,15 @@ using System.Threading.Tasks;
 
 namespace YachtClub.model
 {
-    // This whole class is not tested yet
     class Boat
     {
-        //public enum BoatType
-        //{
-        //    Sailboat,
-        //    Motorsailer,
-        //    Canoe,
-        //    Other
-        //}
+        public enum BoatType
+        {
+            Sailboat,
+            Motorsailer,
+            Canoe,
+            Other
+        }
 
         private BoatType _type;
         private double _length;
@@ -34,12 +33,12 @@ namespace YachtClub.model
             {
                 if (value <= 0 || value > 50)
                 {
-                    throw new ArgumentException("Boat length needs to be between 0 and 50 m");
+                    throw new ArgumentException("Boat length needs to be between 0 and 50 meters");
                 }
                 _length = value;
             }
         }
-        // Not sure if this works (date), i'll get to it later when working with boats
+        // Work on format (just date, no time)
         public DateTime RegistrationDate
         {
             get { return _registrationDate; }

@@ -13,7 +13,7 @@ namespace YachtClub
             Console.Title = "Workshop 2 - YachtClub";
 
             controller.RegistryController c = new controller.RegistryController();
-            c.DoWork();
+            c.DoStartMenu();
         }
     }
 }

@@ -19,9 +19,9 @@ namespace YachtClub.model
             get { return _memberId; }
             set
             {
-                if (value <= 0)
+                if (value <= 0 || value > 9999)
                 {
-                    throw new ArgumentException("MemberId needs to be 1 or higher.");
+                    throw new ArgumentException("MemberId needs to be 1 or higher");
                 }
                 _memberId = value;
             }
@@ -34,31 +34,33 @@ namespace YachtClub.model
             {
                 if (value.Length < 2)
                 {
-                    throw new ArgumentException("Name has too few characters, at least 2 characters.");
+                    throw new ArgumentException("Name has too few characters, at least 2 characters");
                 }
                 else if (value.Length > 20)
                 {
-                    throw new ArgumentException("Name has too many characters, maximum of 20 characters.");
+                    throw new ArgumentException("Name has too many characters, maximum of 20 characters");
                 }
                 _name = value;
             }
         }
 
-        // Simplified for faster testing, just need to be between 1 and 12 in length. Future: Regex
+        // Simplified for faster testing, just need to be between 1 and 12 in length and just numbers
         public string PersonalNumber
         {
             get { return _personalNumber; }
             set
             {
-                if (value.Length > 12) //TODO
+                if (value.Length <= 12 && value.Length > 0 && System.Text.RegularExpressions.Regex.IsMatch(value, @"^\d+$") == true)
                 {
-                    throw new ArgumentException("PersonalNumber/BirthDate is not in a valid format [yyyymmdduuuu].");
+                        _personalNumber = value;
                 }
-                _personalNumber = value;
+                else
+                {
+                    throw new ArgumentException("PersonalNumber/BirthDate is not in a valid format");
+                }
             }
         }
 
-        // Not tested
         public IEnumerable<Boat> Boats
         {
             get { return _boats.AsEnumerable(); }
@@ -71,7 +73,6 @@ namespace YachtClub.model
             PersonalNumber = personalNumber;
         }
 
-        // Not tested
         public void AddBoat(Boat boatToRegister)
         {
             foreach (Boat boat in _boats)
@@ -80,7 +81,7 @@ namespace YachtClub.model
                     boat.Length == boatToRegister.Length &&
                     boat.RegistrationDate == boatToRegister.RegistrationDate)
                 {
-                    throw new ArgumentException("Boat is already registered.");
+                    throw new ArgumentException("Boat is already registered");
                 }
             }
             _boats.Add(boatToRegister);

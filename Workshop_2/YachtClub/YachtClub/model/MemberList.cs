@@ -30,11 +30,11 @@ namespace YachtClub.model
             {
                 if (m.PersonalNumber == memberToRegister.PersonalNumber)
                 {
-                    throw new ArgumentException("A member with specified personal number already exists.");
+                    throw new ArgumentException("A member with specified personal number already exists");
                 }
                 else if (m.MemberId == memberToRegister.MemberId)
                 {
-                    throw new ArgumentException("A member with specified memberId already exists.");
+                    throw new ArgumentException("A member with specified memberId already exists");
                 }
             }
             _members.Add(memberToRegister);
@@ -50,7 +50,8 @@ namespace YachtClub.model
                     return m;
                 }
             }
-            throw new ArgumentException("Member does not exists.");
+            return null;
+            //throw new ArgumentException("Member does not exists");
         }
     }
 }

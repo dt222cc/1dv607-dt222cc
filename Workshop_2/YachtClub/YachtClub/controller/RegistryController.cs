@@ -20,50 +20,74 @@ namespace YachtClub.controller
             _listView = new view.MemberListView(_list);
         }
 
-        // Render the StartMenu and get/do what user wants to do. Note: thinking of a name change
-        public void DoWork()
+        // Handle StartMenu related operations
+        public void DoStartMenu()
         {
             _startView.DisplayStartMenu();
 
             switch (_startView.GetStartMenuChoice())
             {
-                case view.StartView.Choices.AddMember:
+                case view.StartView.StartMenuOperation.AddMember:
                     AddMember();
                     break;
-                case view.StartView.Choices.ListMembersCompact:
-                    DisplayMemberList(true);
+                case view.StartView.StartMenuOperation.ListMembersCompact:
+                    DoMemberList(true);
                     break;
-                case view.StartView.Choices.ListMembersVerbose:
-                    DisplayMemberList(false);
+                case view.StartView.StartMenuOperation.ListMembersVerbose:
+                    DoMemberList(false);
                     break;
-                case view.StartView.Choices.ExitApplication:
+                case view.StartView.StartMenuOperation.ExitApplication:
                     _startView.GetByeMessage();
                     return;
             }
         }
 
-        // Render MemberListView (compact or verbose view), get user input to view member or go back
-        private void DisplayMemberList(bool pickedCompactList)
+        // Handle MemberListView related operations
+        private void DoMemberList(bool pickedCompactList)
         {
             try
             {
-                // Display the ListView
                 _listView.DisplayMemberListView(pickedCompactList);
 
-                // Get user input (display memberId or go back)
                 int memberId = _listView.GetUserInput();
                 if (memberId == 0)
                 {
-                    DoWork();
+                    DoStartMenu();
                 }
                 else
                 {
-                    DisplayMember(_list.GetMemberById(memberId));
+                    DoMemberView(_list.GetMemberById(memberId));
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+            }
+        }
+
+        // Handle MemberView related operations
+        public void DoMemberView(model.Member member)
+        {
+            _memberView = new view.MemberView(member);
+            _memberView.DisplayMember();
+
+            switch (_memberView.GetMemberOperation())
+            {
+                case view.MemberView.MemberOperation.EditMember:
+                    Console.WriteLine("Not yet implemented!");
+                    break;
+                case view.MemberView.MemberOperation.DeleteMember:
+                    Console.WriteLine("Not yet implemented!");
+                    break;
+                case view.MemberView.MemberOperation.AddBoat:
+                    Console.WriteLine("Not yet implemented!");
+                    break;
+                case view.MemberView.MemberOperation.HandleBoats:
+                    Console.WriteLine("Not yet implemented!");
+                    break;
+                case view.MemberView.MemberOperation.GoBack:
+                    DoMemberList(_listView.GetLastView());
+                    return;
             }
         }
 
@@ -78,35 +102,26 @@ namespace YachtClub.controller
                 int memberId = _startView.GetIntegerFromUser("MemberId       : "); //need to think of a way to skip memberId input
                 string name = _startView.GetStringFromUser("Name           : ");
                 string personalNumber = _startView.GetStringFromUser("Personal number: ");
-                // Try to create a member with valid "or" invalid data
+                // Try to create a member with valid/invalid data
                 model.Member member = new model.Member(memberId, name, personalNumber); //throws exception if fail
-
                 _list.AddMember(member);
 
-                // Go to that members view after a successful registration
-                DisplayMember(member);
+                // After a successful registration
+                DoMemberView(member);
             }
             catch (Exception ex)
             {
                 // Does the user wants to make another try?
                 _startView.DisplayRegistration(ex.Message);
-                if (_startView.DoesUserWantsToQuit() == true) {
-                    DoWork();
+                if (_startView.DoesUserWantsToQuit() == true)
+                {
+                    DoStartMenu();
                 }
                 else
                 {
                     AddMember();
                 }
             }
-        }
-
-        // Render MemberView with specified Member / TODO Expand?
-        public void DisplayMember(model.Member member)
-        {
-            _memberView = new view.MemberView(member);
-            _memberView.DisplayMember();
-
-            DoWork();
         }
     }
 }

@@ -53,7 +53,7 @@ namespace YachtClub.model
                             // If there is a section for boat. (status,type,length,registrationdate)
                             else if (values[0] == _sectionBoat)
                             {
-                                BoatType type;
+                                Boat.BoatType type;
                                 Enum.TryParse(values[1], out type);
                                 double length = double.Parse(values[2]);
                                 DateTime registrationDate = DateTime.Parse(values[3]);
@@ -67,8 +67,8 @@ namespace YachtClub.model
                         }
                     }
                 }
-                //_members = members.OrderBy(r => r.MemberId).ToList();
-                _members = members;
+                _members = members.OrderBy(r => r.MemberId).ToList();
+                //_members = members;
             }
             catch (Exception ex)
             {
@@ -82,8 +82,7 @@ namespace YachtClub.model
             {
                 using (StreamWriter writer = new StreamWriter(_path))
                 {
-                    Console.WriteLine("Using StreamWriter");
-
+                    _members.OrderBy(r => r.MemberId).ToList();
                     foreach (Member m in _members)
                     {
                         // Writes a line with a format ([Member];MemberId;Name;PersonalNumber)

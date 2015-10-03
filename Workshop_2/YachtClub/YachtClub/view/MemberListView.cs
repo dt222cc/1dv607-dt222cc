@@ -17,7 +17,7 @@ namespace YachtClub.view
             _list = memberList;
         }
 
-        public void DisplayMemberListView(bool pickedCompactList)
+        public void DisplayMemberListView(bool pickedCompactList, string message = "Enter memberId to view")
         {
             Console.Clear();
             _pickedCompactList = pickedCompactList;
@@ -29,7 +29,7 @@ namespace YachtClub.view
             { 
                 RenderWindow("            Verbose View           ");
             }
-            Console.WriteLine(" 0    Exit");
+            Console.WriteLine(" 0    Go back");
 
             if (pickedCompactList == true)
             {
@@ -51,19 +51,18 @@ namespace YachtClub.view
                     Console.WriteLine(" {0,-4} {1,-16} {2,12}", m.MemberId, m.Name, m.PersonalNumber);
                     if (m.Boats.Count() >= 1)
                     {
-                        Console.WriteLine("      -----------------------------");
+                        Console.WriteLine("      ............................. ");
                     }
                     foreach (model.Boat b in m.Boats)
                     {
                         Console.WriteLine("      {0,-12}{1,5}{2,12:d}", b.Type, b.Length + "m", b.RegistrationDate);
                     }
                 }
-
             }
-            Console.BackgroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine("\n===================================");
-            Console.WriteLine("       Enter memberId to view      ");
-            Console.WriteLine("===================================\n");
+
+            Console.WriteLine("-----------------------------------");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(" {0}: ", message);
             Console.ResetColor();
         }
 
@@ -74,36 +73,37 @@ namespace YachtClub.view
             {
                 try
                 {
-                    Console.Write("Input: ");
-                    int keyPressed = int.Parse(Console.ReadLine());
+                    int memberId = int.Parse(Console.ReadLine());
 
-                    if (DoesUserWantsToQuit(keyPressed) == true)
+                    if (DoesUserWantsToQuit(memberId) == true)
                     {
-                        return keyPressed;
+                        return memberId;
                     }
                     else
                     {
-                        var result = _list.GetMemberById(keyPressed); //Catch ArgumentException
-                        return keyPressed; // memberId
+                        if (_list.GetMemberById(memberId) == null) {
+                            throw new ArgumentNullException();
+                        }
+                        else
+                        {
+                            return memberId;
+                        }
                     }
                 }
-                catch(ArgumentException ex)
+                catch (ArgumentNullException)
                 {
-                    DisplayErrorMessage(ex.Message);
+                    DisplayMemberListView(_pickedCompactList, "Enter existing memberId");
                 }
-                catch
+                catch (FormatException)
                 {
-                    DisplayErrorMessage("Enter a valid memberId.");
+                    DisplayMemberListView(_pickedCompactList, "Enter a valid memberId");
                 }
             } while (true);
         }
 
-        public void DisplayErrorMessage(string message)
+        public bool GetLastView()
         {
-            DisplayMemberListView(_pickedCompactList);
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write("{0}    ", message);
-            Console.ResetColor();
+            return _pickedCompactList;
         }
 
         private bool DoesUserWantsToQuit(int keyPressed)

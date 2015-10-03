@@ -46,7 +46,6 @@
   <ItemGroup>
     <Compile Include="controller\RegistryController.cs" />
     <Compile Include="model\Boat.cs" />
-    <Compile Include="model\BoatType.cs" />
     <Compile Include="model\Member.cs" />
     <Compile Include="model\MemberList.cs" />
     <Compile Include="model\MemberListDAL.cs" />

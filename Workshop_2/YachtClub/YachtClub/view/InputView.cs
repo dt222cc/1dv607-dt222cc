@@ -17,6 +17,12 @@ namespace YachtClub.view
             Console.ResetColor();
         }
 
+        public void RenderChoices(int min, int max)
+        {
+            Console.WriteLine("-----------------------------------");
+            Console.Write(" Enter menu choice [{0}-{1}] : ", min, max);
+        }
+
         //Might remove this method(no need to input memberid, low prio)
         public int GetIntegerFromUser(string prompt = "")
         {
@@ -37,21 +43,14 @@ namespace YachtClub.view
             return Console.ReadLine();
         }
 
-        public bool DoesUserWantsToQuit()
+        public int GetMenuChoiceFromUser(int min, int max)
         {
-            Console.Write("Do you want to try again? (y/n)  : ");
-            do
+            int keyPressed = int.Parse(Console.ReadLine());
+            if (keyPressed < min || keyPressed > max)
             {
-                string input = Console.ReadLine().ToLower();
-                if (input == "y" || input == "")
-                {
-                    return false;
-                }
-                else if (input == "n")
-                {
-                    return true;
-                }
-            } while (true);
+                throw new ArgumentOutOfRangeException();
+            }
+            return keyPressed;
         }
     }
 }
