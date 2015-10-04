@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace YachtClub.view
 {
-    class BoatView: InputView
+    class BoatView: BaseView
     {
         // A quick (bad) solution / some kind of loop would be better
         public model.Boat.BoatType GetTypeFromUser()
@@ -58,6 +58,81 @@ namespace YachtClub.view
         public DateTime GetRegistrationDate()
         {
             return DateTime.Now;
+        }
+
+        public model.Boat GetBoatToEdit(model.Member member)
+        {
+            try
+            {
+                Console.WriteLine("-----------------------------------");
+                Console.Write(" Enter which boat to edit: ");
+                return GetBoatByIndex(member);
+            }
+            catch
+            {
+                throw new ArgumentException("Invalid input!");
+            }
+        }
+
+        public double GetNewLengthFromUser()
+        {
+            try
+            {
+                double newLength = GetLengthFromUser();
+                if (newLength <= 0 || newLength > 50)
+                {
+                    throw new Exception();
+                }
+                Console.WriteLine("-----------------------------------");
+                return newLength;
+            }
+            catch
+            {
+                throw new ArgumentException("Length must be greater than 0m\n and less or equal to 50m");
+            }
+        }
+
+        public bool ConfirmDelete()
+        {
+            DisplayErrorMessage("Are you sure you want to delete this boat?");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(" Press y to remove the boat");
+            Console.WriteLine(" Press anything else will cancel the request");
+            Console.ResetColor();
+            
+            var keyPressed = Console.ReadKey();
+            if (keyPressed.Key == ConsoleKey.Y)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public model.Boat GetBoatToDelete(model.Member member)
+        {
+            try
+            {
+                Console.WriteLine("-----------------------------------");
+                Console.Write(" Enter which boat to delete: ");
+                return GetBoatByIndex(member);
+            }
+            catch
+            {
+                throw new ArgumentException("Invalid input!");
+            }
+        }
+
+        private model.Boat GetBoatByIndex(model.Member m)
+        {
+            try
+            {
+                int boatToEdit = int.Parse(Console.ReadLine());
+                return m.Boats.ElementAt(boatToEdit - 1);
+            }
+            catch
+            {
+                throw new Exception(); ;
+            }
         }
     }
 }

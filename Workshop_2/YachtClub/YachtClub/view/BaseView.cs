@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace YachtClub.view
 {
-    class InputView
+    class BaseView
     {
+        // Some functions to reduce DRY, pretty much self explained
         public void RenderWindow(string content)
         {
             Console.Clear();
@@ -32,6 +33,13 @@ namespace YachtClub.view
                 throw new ArgumentOutOfRangeException();
             }
             return keyPressed;
+        }
+
+        public void PressKeyToContinue()
+        {
+            Console.WriteLine("\n Press any key to continue");
+            Console.ResetColor();
+            Console.ReadKey();
         }
 
         public void DisplayErrorMessage(string errorMessage)

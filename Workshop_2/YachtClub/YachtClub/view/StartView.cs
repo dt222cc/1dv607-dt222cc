@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace YachtClub.view
 {
-    class StartView: InputView
+    class StartView: BaseView
     {
         // The startmenu has these choices
         public enum StartMenuOperation
@@ -57,7 +57,7 @@ namespace YachtClub.view
             } while (true);
         }
 
-        //Might remove this method(no need to input memberid)
+        // The start of member registration
         public int GetMemberIdFromUser()
         {
             Console.WriteLine("-----------------------------------");
@@ -69,7 +69,7 @@ namespace YachtClub.view
             }
             catch
             {
-                return 0;
+                return 0; // Force 0 coz the validation of creating a new member kicks in instead
             }
         }
 
@@ -89,7 +89,7 @@ namespace YachtClub.view
         public void GetByeMessage()
         {
             DisplayStartMenu();
-            Console.Write("\n\n Goodbye! ");
+            Console.Write("\n Goodbye! ");
         }
     }
 }

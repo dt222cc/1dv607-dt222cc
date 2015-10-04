@@ -1,5 +1,6 @@
-[Member];2;test;3233;
-[Boat];Canoe;0,5;2015-10-03 00:00:00;
+[Member];2;date test;3233;
+[Boat];Canoe;2;2015-10-03 00:00:00;
+[Boat];Sailboat;0,1;2015-10-04 00:00:00;
 [Member];5;12ssss;3232323;
 [Member];12;sdasd;199302271045;
 [Boat];Canoe;2;2015-01-02 00:00:00;
@@ -10,7 +11,6 @@
 [Member];55;126d;33233;
 [Member];132;sadsa2d;323223;
 [Boat];Sailboat;5;2015-10-04 00:00:00;
-[Boat];Canoe;2;2015-10-04 00:00:00;
 [Member];455;126ddd;221645;
 [Member];1325;editing name;125432;
 [Boat];Canoe;0,5;2015-10-04 00:00:00;
