@@ -87,6 +87,24 @@ namespace YachtClub.model
             _boats.Add(boatToRegister);
         }
 
+        public void DeleteBoat(Boat boatToDelete)
+        {
+            try
+            {
+                foreach (Boat b in _boats)
+                {
+                    if (b == boatToDelete)
+                    {
+                        _boats.Remove(boatToDelete);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
         public void ChangeName(string newName)
         {
             _name = newName;

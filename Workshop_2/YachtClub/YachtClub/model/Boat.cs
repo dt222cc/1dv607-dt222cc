@@ -38,7 +38,7 @@ namespace YachtClub.model
                 _length = value;
             }
         }
-        // Work on format (just date, no time)
+        // Meh, want to remove the time from datetime (.Date)
         public DateTime RegistrationDate
         {
             get { return _registrationDate; }
@@ -49,7 +49,12 @@ namespace YachtClub.model
         {
             Type = type;
             Length = length;
-            RegistrationDate = registrationDate;
+            RegistrationDate = registrationDate.Date;
+        }
+
+        public void ChangeLength(double newLength)
+        {
+            _length = newLength;
         }
     }
 }

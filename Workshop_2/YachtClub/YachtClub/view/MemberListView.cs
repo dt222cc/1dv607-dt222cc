@@ -6,17 +6,19 @@ using System.Threading.Tasks;
 
 namespace YachtClub.view
 {
-    class MemberListView: InputView
+    class MemberListView: BaseView
     {
         private bool _pickedCompactList;
 
         private model.MemberList _list;
 
+        // Dependent of the MemberList
         public MemberListView(model.MemberList memberList)
         {
             _list = memberList;
         }
-
+        
+        // Display either Compact- or Verbose list
         public void DisplayMemberListView(bool pickedCompactList, string message = "Enter memberId to view")
         {
             _pickedCompactList = pickedCompactList;
@@ -65,7 +67,7 @@ namespace YachtClub.view
             Console.ResetColor();
         }
 
-        //Loop until a valid input was made, number
+        //Loop until a valid input was made, integer
         public int GetUserInput()
         {
             do
@@ -74,7 +76,7 @@ namespace YachtClub.view
                 {
                     int memberId = int.Parse(Console.ReadLine());
 
-                    if (DoesUserWantsToQuit(memberId) == true)
+                    if (memberId == 0) // does user want quit?
                     {
                         return memberId;
                     }
@@ -100,18 +102,10 @@ namespace YachtClub.view
             } while (true);
         }
 
+        // When returning from MemberView
         public bool GetLastView()
         {
             return _pickedCompactList;
-        }
-
-        private bool DoesUserWantsToQuit(int keyPressed)
-        {
-            if (keyPressed == 0)
-            {
-                return true;
-            }
-            return false;
         }
     }
 }

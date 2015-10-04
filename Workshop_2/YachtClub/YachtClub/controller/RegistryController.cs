@@ -8,13 +8,11 @@ namespace YachtClub.controller
 {
     class RegistryController
     {
-        #region MyClasses
         private model.MemberList _list;
         private view.StartView _startView;
         private view.MemberListView _listView;
         private view.MemberView _memberView;
         private view.BoatView _boatView;
-        #endregion
 
         public RegistryController()
         {
@@ -54,14 +52,15 @@ namespace YachtClub.controller
             }
         }
 
-        // Handle MemberListView related operations
+        // Handle MemberListView related operations (Display list view, specific member)
         private void DoMemberList(bool pickedCompactList)
         {
             try
             {
-                _list.UpdateList();
+                _list.UpdateList(); // optional
                 _listView.DisplayMemberListView(pickedCompactList);
 
+                // Display memberview or go back to startmenu
                 int memberId = _listView.GetUserInput();
                 if (memberId == 0)
                 {
@@ -74,13 +73,12 @@ namespace YachtClub.controller
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.Message); // can be removed i think (used to check code during implementation)
             }
         }
 
+        #region MemberOperations
         // Handle MemberView related operations
-        #region //MemberOperations
-
         private void DoMemberView(model.Member member)
         {
             try
@@ -115,19 +113,21 @@ namespace YachtClub.controller
             }
         }
 
+        // Display views, get inputs to create/save member to list
         private void AddMember()
         {
             try
             {
                 _startView.DisplayStartMenu();
-                int memberId = _startView.GetMemberIdFromUser(); //need to think of a way to skip memberId input
+                int memberId = _startView.GetMemberIdFromUser(); // More ideal to remove this and have it automated
                 string name = _startView.GetStringFromUser(true);
                 string personalNumber = _startView.GetStringFromUser(false);
-                model.Member member = new model.Member(memberId, name, personalNumber); //throws exception if fail
+                model.Member member = new model.Member(memberId, name, personalNumber); // Throws exception if fail
                 _list.AddMember(member);
                 _list.SaveMemberList();
                 DoMemberView(member);
             }
+            // Using catch do display error messages to user
             catch (Exception ex)
             {
                 _startView.DisplayStartMenu();
@@ -143,7 +143,7 @@ namespace YachtClub.controller
             }
         }
 
-        // Just member name for the moment
+        // Change name
         private void EditMember(model.Member member)
         {
             try
@@ -186,14 +186,16 @@ namespace YachtClub.controller
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                _memberView.DisplayErrorMessage(ex.Message);
+                _memberView.PressKeyToContinue();
+                DoMemberView(member);
             }
         }
-
         #endregion
-        #region //MemberOperations
+
+        #region BoatOperations
         // Try to create and add a new boat to the member's boatlist
-        private void AddBoat(model.Member member)
+        private void AddBoat(model.Member member) // Which member to add the boat to
         {
             try
             {
@@ -223,33 +225,61 @@ namespace YachtClub.controller
 
         private void EditBoat(model.Member member)
         {
-            Console.WriteLine("Not yet implemented");
-            try
-            {
-                //display boats similar to add boat
-                //get input
-                //change boat info(length?)
-                //redirect to memberview
+            // Only able to edit and delete boats if you own a boat
+            if(member.Boats.Count() == 0) {
+                DoMemberView(member);
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine(ex.Message);
+                try
+                {
+                    model.Boat boatToEdit = _boatView.GetBoatToEdit(member);
+                    double newLength = _boatView.GetNewLengthFromUser();
+                    boatToEdit.ChangeLength(newLength);
+                    _list.SaveMemberList();
+                    DoMemberView(member);
+                }
+                catch (Exception ex)
+                {
+                    _memberView.DisplayMember(member);
+                    _memberView.DisplayErrorMessage(ex.Message);
+                    if (_memberView.DoesUserWantsToQuit() == true)
+                    {
+                        DoMemberView(member);
+                    }
+                    else
+                    {
+                        EditBoat(member);
+                    }
+                } 
             }
         }
 
         private void DeleteBoat(model.Member member)
         {
-            Console.WriteLine("Not yet implemented");
-            try
+            if (member.Boats.Count() == 0)
             {
-                //display boats similar to add boat
-                //get input
-                //try to delete boat
-                //redirect to memberview
+                DoMemberView(member);
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine(ex.Message);
+                try
+                {
+                    model.Boat boatToDelete = _boatView.GetBoatToDelete(member);
+                    if (_boatView.ConfirmDelete() == true)
+                    {
+                        member.DeleteBoat(boatToDelete);
+                        _list.SaveMemberList();
+                    }
+
+                    DoMemberView(member);
+                }
+                catch (Exception ex)
+                {
+                    _boatView.DisplayErrorMessage(ex.Message);
+                    _boatView.PressKeyToContinue();
+                    DoMemberView(member);
+                }
             }
         }
         #endregion

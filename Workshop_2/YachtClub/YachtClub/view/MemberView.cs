@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace YachtClub.view
 {
-    class MemberView: InputView
+    class MemberView: BaseView
     {
         public enum MemberOperation
         {
@@ -18,7 +18,7 @@ namespace YachtClub.view
             DeleteBoat
         };
 
-        private const int _maxKey = 4;
+        private const int _maxKey = 5;
         private const int _minKey = 0;
 
         private model.Member _member;
@@ -46,13 +46,14 @@ namespace YachtClub.view
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine(" Registered boats");
                     Console.ResetColor();
-
+                    
+                    int count = 1;
                     foreach (model.Boat b in _member.Boats)
                     {
                         Console.WriteLine(" .................................");
-                        Console.WriteLine(" Type              : {0}", b.Type);
-                        Console.WriteLine(" Length            : {0}m", b.Length);
-                        Console.WriteLine(" Registration date : {0:d}", b.RegistrationDate);
+                        Console.WriteLine(" {0}. Type              : {1}", count++, b.Type);
+                        Console.WriteLine("    Length            : {0}m", b.Length);
+                        Console.WriteLine("    Registration date : {0:d}", b.RegistrationDate);
                     }
                     Console.WriteLine("-----------------------------------");
                 }
@@ -61,6 +62,8 @@ namespace YachtClub.view
                 Console.WriteLine(" 1. Edit member details");
                 Console.WriteLine(" 2. Delete user");
                 Console.WriteLine(" 3. Add a new boat");
+                // Thought of having these concealed if user have no boats registered,
+                // but then i had to change the method below, coz the choices are still there.
                 Console.WriteLine(" 4. Edit a boat");
                 Console.WriteLine(" 5. Remove a boat");
             }
@@ -102,6 +105,7 @@ namespace YachtClub.view
             Console.WriteLine("-----------------------------------");
             Console.Write(" New name: ");
             string newName = Console.ReadLine();
+            // Had to have some validation here, else you could have an empty name which then conflicts with loading the list.txt
             if (newName == "" || newName.Length < 2 || newName.Length > 20) {
                 throw new ArgumentException("Name must be atleast 2 characters\n long and maximum of 20 characters");
             }
@@ -112,7 +116,7 @@ namespace YachtClub.view
         {
             Console.WriteLine("-----------------------------------");
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write(" Repeat the memberId to confirm: ");
+            Console.Write(" Repeat the memberId to confirm: "); // This
 
             try
             {
@@ -139,13 +143,6 @@ namespace YachtClub.view
 
             PressKeyToContinue();
             return false;
-        }
-
-        private void PressKeyToContinue()
-        {
-            Console.WriteLine("\n Press any key to continue");
-            Console.ResetColor();
-            Console.ReadKey();
         }
     }
 }
