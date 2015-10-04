@@ -26,8 +26,7 @@ namespace YachtClub.view
             Console.WriteLine(" 0. Exit                           ");
             Console.WriteLine(" 1. Show members in a compact view ");
             Console.WriteLine(" 2. Show members in a verbose view ");
-            Console.WriteLine(" 3. Add a new user                 \n");
-            RenderChoices(_minKey, _maxKey);
+            Console.WriteLine(" 3. Add a new user                 ");
         }
         
         // Get the startmenu choice from user, must be integer and within the allowed parameters
@@ -37,6 +36,7 @@ namespace YachtClub.view
             {
                 try
                 {
+                    RenderChoices(_minKey, _maxKey);
                     int keyPressed = GetMenuChoiceFromUser(_minKey, _maxKey);
                     switch (keyPressed)
                     {
@@ -60,7 +60,9 @@ namespace YachtClub.view
         //Might remove this method(no need to input memberid)
         public int GetMemberIdFromUser()
         {
-            Console.Write("MemberId       : ");
+            Console.WriteLine("-----------------------------------");
+            Console.WriteLine(" Member registration\n");
+            Console.Write(" MemberId       : ");
             try
             {
                 return int.Parse(Console.ReadLine());
@@ -75,11 +77,11 @@ namespace YachtClub.view
         {
             if (isName == true)
             {
-                Console.Write("Name           : ");
+                Console.Write(" Name           : ");
             }
             else
             {
-                Console.Write("Personal number: ");
+                Console.Write(" Personal number: ");
             }
             return Console.ReadLine();
         }

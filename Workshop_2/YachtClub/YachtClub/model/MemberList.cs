@@ -52,9 +52,33 @@ namespace YachtClub.model
             return null;
         }
 
+
+        public void DeleteMember(Member memberToDelete)
+        {
+            try
+            {
+                foreach (Member m in _members)
+                {
+                    if (m.MemberId == memberToDelete.MemberId)
+                    {
+                        _members.Remove(memberToDelete);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
         public void SaveMemberList()
         {
             _mDAL.Save();
+        }
+
+        public void UpdateList()
+        {
+            _members = _mDAL.GetAll();
         }
     }
 }

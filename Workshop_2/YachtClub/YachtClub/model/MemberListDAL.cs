@@ -79,9 +79,9 @@ namespace YachtClub.model
         {
             try
             {
+                _members.OrderBy(r => r.MemberId).ToList();
                 using (StreamWriter writer = new StreamWriter(_path))
                 {
-                    _members.OrderBy(r => r.MemberId).ToList();
                     foreach (Member m in _members)
                     {
                         // Writes a line with a format ([Member];MemberId;Name;PersonalNumber)

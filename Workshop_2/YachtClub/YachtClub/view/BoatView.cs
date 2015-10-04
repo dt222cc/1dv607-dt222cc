@@ -11,11 +11,13 @@ namespace YachtClub.view
         // A quick (bad) solution / some kind of loop would be better
         public model.Boat.BoatType GetTypeFromUser()
         {
+            Console.WriteLine("-----------------------------------");
+            Console.WriteLine(" Boat categories/types");
             Console.WriteLine(" 1. {0}", model.Boat.BoatType.Sailboat);
             Console.WriteLine(" 2. {0}", model.Boat.BoatType.Motorsailer);
             Console.WriteLine(" 3. {0}", model.Boat.BoatType.Canoe);
             Console.WriteLine(" 4. {0}", model.Boat.BoatType.Other);
-            Console.Write("\nPick boat category: ");
+            Console.Write("\n -Pick boat category/type: ");
 
             string keyPressed = Console.ReadLine();
             if (keyPressed == "1")
@@ -42,7 +44,7 @@ namespace YachtClub.view
 
         public double GetLengthFromUser()
         {
-            Console.Write("Input boat length in meters: ");
+            Console.Write(" -Input boat length in meters: ");
             try
             {
                 return double.Parse(Console.ReadLine());

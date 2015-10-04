@@ -14,7 +14,8 @@ namespace YachtClub.view
             EditMember,
             DeleteMember,
             AddBoat,
-            HandleBoats
+            EditBoat,
+            DeleteBoat
         };
 
         private const int _maxKey = 4;
@@ -58,10 +59,10 @@ namespace YachtClub.view
 
                 Console.WriteLine(" 0. View memberlist");
                 Console.WriteLine(" 1. Edit member details");
-                Console.WriteLine(" 2. Delete member");
+                Console.WriteLine(" 2. Delete user");
                 Console.WriteLine(" 3. Add a new boat");
-                Console.WriteLine(" 4. Handle boats");
-                RenderChoices(_minKey, _maxKey);
+                Console.WriteLine(" 4. Edit a boat");
+                Console.WriteLine(" 5. Remove a boat");
             }
         }
 
@@ -71,6 +72,7 @@ namespace YachtClub.view
             {
                 try
                 {
+                    RenderChoices(_minKey, _maxKey);
                     int keyPressed = GetMenuChoiceFromUser(_minKey, _maxKey);
                     switch (keyPressed)
                     {
@@ -83,7 +85,9 @@ namespace YachtClub.view
                         case 3:
                             return MemberOperation.AddBoat;
                         case 4:
-                            return MemberOperation.HandleBoats;
+                            return MemberOperation.EditBoat;
+                        case 5:
+                            return MemberOperation.DeleteBoat;
                     }
                 }
                 catch
@@ -93,18 +97,55 @@ namespace YachtClub.view
             } while (true);
         }
 
-        public string ChangeName(string errorMessage = "")
+        public string ChangeName()
         {
-            RenderWindow("       Edit member details        ");
-            if (errorMessage != "")
+            Console.WriteLine("-----------------------------------");
+            Console.Write(" New name: ");
+            string newName = Console.ReadLine();
+            if (newName == "" || newName.Length < 2 || newName.Length > 20) {
+                throw new ArgumentException("Name must be atleast 2 characters\n long and maximum of 20 characters");
+            }
+            return newName;
+        }
+
+        public bool ConfirmDelete(model.Member m)
+        {
+            Console.WriteLine("-----------------------------------");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(" Repeat the memberId to confirm: ");
+
+            try
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("{0}\n", errorMessage);
-                Console.ResetColor();
+                int memberId = int.Parse(Console.ReadLine());
+                Console.WriteLine("");
+                if (memberId == m.MemberId)
+                {
+                    PressKeyToContinue();
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine(" MemberId missmatched!");
+                }
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("\n Invalid ID!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
 
-            Console.Write(" New name: ");
-            return Console.ReadLine();
+            PressKeyToContinue();
+            return false;
+        }
+
+        private void PressKeyToContinue()
+        {
+            Console.WriteLine("\n Press any key to continue");
+            Console.ResetColor();
+            Console.ReadKey();
         }
     }
 }

@@ -59,6 +59,7 @@ namespace YachtClub.controller
         {
             try
             {
+                _list.UpdateList();
                 _listView.DisplayMemberListView(pickedCompactList);
 
                 int memberId = _listView.GetUserInput();
@@ -78,6 +79,8 @@ namespace YachtClub.controller
         }
 
         // Handle MemberView related operations
+        #region //MemberOperations
+
         private void DoMemberView(model.Member member)
         {
             try
@@ -87,21 +90,19 @@ namespace YachtClub.controller
                 switch (_memberView.GetMemberOperation())
                 {
                     case view.MemberView.MemberOperation.EditMember:
-                        Console.WriteLine("Not yet implemented");
                         EditMember(member);
-                        DoMemberView(member);
                         break;
                     case view.MemberView.MemberOperation.DeleteMember:
-                        Console.WriteLine("Not yet implemented");
-                        DoMemberView(member);
+                        DeleteMember(member);
                         break;
                     case view.MemberView.MemberOperation.AddBoat:
-                        AddBoatToMember(member);
+                        AddBoat(member);
                         break;
-                    case view.MemberView.MemberOperation.HandleBoats:
-                        //to boatview get boatoperation
-                        Console.WriteLine("Not yet implemented");
-                        DoMemberView(member);
+                    case view.MemberView.MemberOperation.EditBoat:
+                        EditBoat(member);
+                        break;
+                    case view.MemberView.MemberOperation.DeleteBoat:
+                        DeleteBoat(member);
                         break;
                     case view.MemberView.MemberOperation.GoBack:
                         DoMemberList(_listView.GetLastView());
@@ -114,25 +115,11 @@ namespace YachtClub.controller
             }
         }
 
-        private void DoBoatView()
-        {
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-
-        // Try to create and add a new member to the list
         private void AddMember()
         {
             try
             {
-                _startView.DisplayMemberRegistration(true);
-
+                _startView.DisplayStartMenu();
                 int memberId = _startView.GetMemberIdFromUser(); //need to think of a way to skip memberId input
                 string name = _startView.GetStringFromUser(true);
                 string personalNumber = _startView.GetStringFromUser(false);
@@ -143,7 +130,7 @@ namespace YachtClub.controller
             }
             catch (Exception ex)
             {
-                _startView.DisplayMemberRegistration(true);
+                _startView.DisplayStartMenu();
                 _startView.DisplayErrorMessage(ex.Message);
                 if (_startView.DoesUserWantsToQuit() == true)
                 {
@@ -156,11 +143,46 @@ namespace YachtClub.controller
             }
         }
 
-        private void DeleteMember()
+        // Just member name for the moment
+        private void EditMember(model.Member member)
         {
             try
             {
+                _memberView.DisplayMember(member);
+                string newName = _memberView.ChangeName();
+                member.ChangeName(newName);
+                _list.SaveMemberList();
+                DoMemberView(member);
+            }
+            catch (Exception ex)
+            {
+                _memberView.DisplayMember(member);
+                _memberView.DisplayErrorMessage(ex.Message);
+                if (_memberView.DoesUserWantsToQuit() == true)
+                {
+                    DoMemberView(member);
+                }
+                else
+                {
+                    EditMember(member);
+                }
+            }
+        }
 
+        private void DeleteMember(model.Member member)
+        {
+            try
+            {
+                if (_memberView.ConfirmDelete(member) == true)
+                {
+                    _list.DeleteMember(member);
+                    _list.SaveMemberList();
+                    DoStartMenu();
+                }
+                else
+                {
+                    DoMemberView(member);
+                }
             }
             catch (Exception ex)
             {
@@ -168,37 +190,14 @@ namespace YachtClub.controller
             }
         }
 
-        // Edit what? name? can you change your personal number? just boats?
-        private void EditMember(model.Member m)
-        {
-            try
-            {
-                string newName = _memberView.ChangeName();
-                m.ChangeName(newName);
-                _list.SaveMemberList();
-            }
-            catch (Exception ex)
-            {
-                _memberView.DisplayMemberRegistration(false);
-                _memberView.DisplayErrorMessage(ex.Message);
-                if (_memberView.DoesUserWantsToQuit() == true)
-                {
-                    DoMemberView(m);
-                }
-                else
-                {
-                    EditMember(m);
-                }
-            }
-        }
-
+        #endregion
+        #region //MemberOperations
         // Try to create and add a new boat to the member's boatlist
-        private void AddBoatToMember(model.Member member)
+        private void AddBoat(model.Member member)
         {
             try
             {
-                _boatView.DisplayMemberRegistration(false);
-
+                _memberView.DisplayMember(member);
                 model.Boat.BoatType type = _boatView.GetTypeFromUser();
                 double length = _boatView.GetLengthFromUser();
                 DateTime registrationDate = _boatView.GetRegistrationDate();
@@ -209,7 +208,7 @@ namespace YachtClub.controller
             }
             catch (Exception ex)
             {
-                _boatView.DisplayMemberRegistration(false);
+                _memberView.DisplayMember(member);
                 _boatView.DisplayErrorMessage(ex.Message);
                 if (_boatView.DoesUserWantsToQuit() == true)
                 {
@@ -217,16 +216,20 @@ namespace YachtClub.controller
                 }
                 else
                 {
-                    AddBoatToMember(member);
+                    AddBoat(member);
                 }
             }
         }
 
-        private void DeleteBoatFromMember()
+        private void EditBoat(model.Member member)
         {
+            Console.WriteLine("Not yet implemented");
             try
             {
-
+                //display boats similar to add boat
+                //get input
+                //change boat info(length?)
+                //redirect to memberview
             }
             catch (Exception ex)
             {
@@ -234,16 +237,21 @@ namespace YachtClub.controller
             }
         }
 
-        private void EditBoat()
+        private void DeleteBoat(model.Member member)
         {
+            Console.WriteLine("Not yet implemented");
             try
             {
-
+                //display boats similar to add boat
+                //get input
+                //try to delete boat
+                //redirect to memberview
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
         }
+        #endregion
     }
 }

@@ -24,24 +24,6 @@ namespace YachtClub.view
             Console.Write(" Enter menu choice [{0}-{1}] : ", min, max);
         }
 
-        public void DisplayMemberRegistration(bool displayMember)
-        {
-            if (displayMember == true) {
-                RenderWindow("        Member registration        ");
-            }
-            else
-            {
-                RenderWindow("         Boat registration         ");
-            }
-        }
-
-        public void DisplayErrorMessage(string errorMessage)
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("{0}\n", errorMessage);
-            Console.ResetColor();
-        }
-
         public int GetMenuChoiceFromUser(int min, int max)
         {
             int keyPressed = int.Parse(Console.ReadLine());
@@ -52,9 +34,18 @@ namespace YachtClub.view
             return keyPressed;
         }
 
+        public void DisplayErrorMessage(string errorMessage)
+        {
+            Console.WriteLine("-----------------------------------");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(" {0}\n", errorMessage);
+            Console.ResetColor();
+        }
+
+
         public bool DoesUserWantsToQuit()
         {
-            Console.Write("Do you want to try again? (y/n)  : ");
+            Console.Write(" Do you want to try again? (y/n)  : ");
             do
             {
                 string input = Console.ReadLine().ToLower();
