@@ -1,0 +1,20 @@
+title Sequence: Add member
+
+User->RegistryController: doWork()
+
+RegistryController->RegistryController: \ndoStartMenu()
+RegistryController->StartView: displayStartMenu()
+RegistryController->StartView: GetStartMenuChoice()
+
+note right of RegistryController: 1. View all members in a Compact view
+RegistryController->RegistryController: \ndoMemberList(bool \npickedCompactList)
+RegistryController->MemberListView: displayMemberListView(pickedCompactList)
+RegistryController->MemberListView: memberId = getUserInput()
+RegistryController->MemberList: Member member = getMemberById(memberId)
+
+alt successful case
+RegistryController->MemberView: doMemberView(member)
+else some kind of failure
+RegistryController->-StartView: if(memberId == 0)\ndoStartMenu()
+RegistryController->-MemberListView: if(invalid input or memberId)\ndisplayMemberListView(pickedCompactList, message)
+end

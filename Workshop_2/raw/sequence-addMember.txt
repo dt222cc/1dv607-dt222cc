@@ -1,0 +1,25 @@
+title Sequence: Add member
+
+User->RegistryController: doWork()
+
+RegistryController->RegistryController: \ndoStartMenu()
+RegistryController->StartView: displayStartMenu()
+RegistryController->StartView: GetStartMenuChoice()
+note right of RegistryController: 3. Add member
+RegistryController->RegistryController: \naddMember()
+RegistryController->StartView: displayStartMenu()
+RegistryController->StartView: memberId = getMemberIdFromUser()
+RegistryController->StartView: name = GetStringFromUser()
+RegistryController->StartView: personalNumber = GetStringFromUser()
+
+RegistryController->Member: Member(memberId, name, personalNumber)
+RegistryController->MemberList: addMember(member)
+
+alt successful case
+RegistryController->MemberList: saveMemberList()
+RegistryController->MemberView: doMemberView(member)
+else some kind of failure
+RegistryController->-StartView: doesUserWantsToQuit()
+RegistryController->-StartView: true -> doStartMenu()
+RegistryController->-StartView: false -> addMember()
+end
