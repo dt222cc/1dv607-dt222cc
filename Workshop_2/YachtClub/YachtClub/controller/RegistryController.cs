@@ -23,7 +23,7 @@ namespace YachtClub.controller
             _listView = new view.MemberListView(_list);
         }
 
-        // Handle StartMenu related operations
+        // Handle StartMenu related operations (Display startmenu, register member)
         public void DoStartMenu()
         {
             try
@@ -52,7 +52,7 @@ namespace YachtClub.controller
             }
         }
 
-        // Handle MemberListView related operations (Display list view, specific member)
+        // Handle MemberListView related operations (Display list view, get specific member)
         private void DoMemberList(bool pickedCompactList)
         {
             try
@@ -77,8 +77,7 @@ namespace YachtClub.controller
             }
         }
 
-        #region MemberOperations
-        // Handle MemberView related operations
+        // Handle MemberView related operations (Display member, member/boat operations)
         private void DoMemberView(model.Member member)
         {
             try
@@ -113,6 +112,7 @@ namespace YachtClub.controller
             }
         }
 
+        #region MemberOperations
         // Display views, get inputs to create/save member to list
         private void AddMember()
         {
@@ -143,7 +143,7 @@ namespace YachtClub.controller
             }
         }
 
-        // Change name
+        // Display view to change name, get new name and do the change
         private void EditMember(model.Member member)
         {
             try
@@ -169,6 +169,7 @@ namespace YachtClub.controller
             }
         }
 
+        // Display view to delete a member (confirmation window), delete the member
         private void DeleteMember(model.Member member)
         {
             try
@@ -194,7 +195,7 @@ namespace YachtClub.controller
         #endregion
 
         #region BoatOperations
-        // Try to create and add a new boat to the member's boatlist
+        // Display views, get inputs to create/save boat to a member
         private void AddBoat(model.Member member) // Which member to add the boat to
         {
             try
@@ -223,6 +224,8 @@ namespace YachtClub.controller
             }
         }
 
+        // Display view to change a boat's lenght, get new length and do the change
+        // Note: Edit boat? isn't more correct to remove a boat and register a new? or is it when you "remodel" an existing boat
         private void EditBoat(model.Member member)
         {
             // Only able to edit and delete boats if you own a boat
@@ -233,6 +236,7 @@ namespace YachtClub.controller
             {
                 try
                 {
+                    // Perhaps a bad practise for methods to have two kinds of responsabilities? (ex: write some lines & get input, return boat)
                     model.Boat boatToEdit = _boatView.GetBoatToEdit(member);
                     double newLength = _boatView.GetNewLengthFromUser();
                     boatToEdit.ChangeLength(newLength);
@@ -255,6 +259,7 @@ namespace YachtClub.controller
             }
         }
 
+        // Display view to delete a boat (pick boat, confirmation window), delete the boat from the member
         private void DeleteBoat(model.Member member)
         {
             if (member.Boats.Count() == 0)

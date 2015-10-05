@@ -69,6 +69,7 @@ namespace YachtClub.view
             }
         }
 
+        // Get user input return operation
         public MemberOperation GetMemberOperation()
         {
             do
@@ -100,6 +101,7 @@ namespace YachtClub.view
             } while (true);
         }
 
+        // Returns the new name for the member
         public string ChangeName()
         {
             Console.WriteLine("-----------------------------------");
@@ -112,11 +114,12 @@ namespace YachtClub.view
             return newName;
         }
 
+        // With some validation to confirm the delete
         public bool ConfirmDelete(model.Member m)
         {
             Console.WriteLine("-----------------------------------");
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write(" Repeat the memberId to confirm: "); // This
+            Console.Write(" Repeat the memberId to confirm: ");
 
             try
             {

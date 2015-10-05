@@ -108,6 +108,7 @@ namespace YachtClub.view
             return false;
         }
 
+        // Hm.. DRY, could skip the "to edit/delete" part and refactor this
         public model.Boat GetBoatToDelete(model.Member member)
         {
             try
@@ -127,11 +128,11 @@ namespace YachtClub.view
             try
             {
                 int boatToEdit = int.Parse(Console.ReadLine());
-                return m.Boats.ElementAt(boatToEdit - 1);
+                return m.Boats.ElementAt(boatToEdit - 1); // started without the minus 1 first, then added it to fix so the correct boat gets changed
             }
             catch
             {
-                throw new Exception(); ;
+                throw new Exception(); // Pass the exception
             }
         }
     }
