@@ -67,7 +67,7 @@ namespace YachtClub.view
             Console.ResetColor();
         }
 
-        //Loop until a valid input was made, integer
+        // Loop until a valid input was made, integer
         public int GetUserInput()
         {
             do
@@ -102,7 +102,7 @@ namespace YachtClub.view
             } while (true);
         }
 
-        // When returning from MemberView
+        // When returning from MemberView to MemberListView
         public bool GetLastView()
         {
             return _pickedCompactList;

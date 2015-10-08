@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace YachtClub.view
 {
-    class BaseView
+    class BaseView // Rename to CommonView or View?
     {
-        // Some functions to reduce DRY, pretty much self explained
+        // Some helper methods to reduce DRY, pretty much self explained
         public void RenderWindow(string content)
         {
             Console.Clear();
@@ -42,6 +42,7 @@ namespace YachtClub.view
             Console.ReadKey();
         }
 
+        // The following methods could be refactored to a different class
         public void DisplayErrorMessage(string errorMessage)
         {
             Console.WriteLine("-----------------------------------");

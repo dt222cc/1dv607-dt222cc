@@ -8,7 +8,7 @@ namespace YachtClub.view
 {
     class BoatView: BaseView
     {
-        // A quick (bad) solution / some kind of loop would be better
+        // A quick (bad) solution / some kind of loop would be better (not so experienced with enums yet)
         public model.Boat.BoatType GetTypeFromUser()
         {
             Console.WriteLine("-----------------------------------");
@@ -55,18 +55,22 @@ namespace YachtClub.view
             }
         }
 
+        // Return current date to register registrationDate (note: perhaps out of place)
         public DateTime GetRegistrationDate()
         {
             return DateTime.Now;
         }
 
-        public model.Boat GetBoatToEdit(model.Member member)
+        // Does user wants to Edit or Delete
+        public model.Boat GetBoatToEditOrDelete(model.Member member, string operationInLowercaps)
         {
             try
             {
                 Console.WriteLine("-----------------------------------");
-                Console.Write(" Enter which boat to edit: ");
-                return GetBoatByIndex(member);
+                Console.Write(" Enter which boat to {0} ", operationInLowercaps);
+
+                int boatToEdit = int.Parse(Console.ReadLine());
+                return member.Boats.ElementAt(boatToEdit - 1); // Index start at -1 for some reason
             }
             catch
             {
@@ -74,6 +78,7 @@ namespace YachtClub.view
             }
         }
 
+        // Edit boat, length
         public double GetNewLengthFromUser()
         {
             try
@@ -92,6 +97,7 @@ namespace YachtClub.view
             }
         }
 
+        // Confirmation for deleting selected boat
         public bool ConfirmDelete()
         {
             DisplayErrorMessage("Are you sure you want to delete this boat?");
@@ -99,41 +105,14 @@ namespace YachtClub.view
             Console.WriteLine(" Press y to remove the boat");
             Console.WriteLine(" Press anything else will cancel the request");
             Console.ResetColor();
-            
+
+            // Using ReadKey for instant input
             var keyPressed = Console.ReadKey();
             if (keyPressed.Key == ConsoleKey.Y)
             {
                 return true;
             }
             return false;
-        }
-
-        // Hm.. DRY, could skip the "to edit/delete" part and refactor this
-        public model.Boat GetBoatToDelete(model.Member member)
-        {
-            try
-            {
-                Console.WriteLine("-----------------------------------");
-                Console.Write(" Enter which boat to delete: ");
-                return GetBoatByIndex(member);
-            }
-            catch
-            {
-                throw new ArgumentException("Invalid input!");
-            }
-        }
-
-        private model.Boat GetBoatByIndex(model.Member m)
-        {
-            try
-            {
-                int boatToEdit = int.Parse(Console.ReadLine());
-                return m.Boats.ElementAt(boatToEdit - 1); // started without the minus 1 first, then added it to fix so the correct boat gets changed
-            }
-            catch
-            {
-                throw new Exception(); // Pass the exception
-            }
         }
     }
 }

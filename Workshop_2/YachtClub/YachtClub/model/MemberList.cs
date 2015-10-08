@@ -19,27 +19,30 @@ namespace YachtClub.model
             }
         }
 
+        // Get all the members and the members' boats from the "textfile"
         public MemberList()
         {
             _members = _mDAL.GetAll();
         }
 
+        // Try to add the member to the register but validates the id and the ssn/pn, before that happens
         public void AddMember(Member memberToRegister)
         {
             foreach (Member m in _members)
             {
-                if (m.PersonalNumber == memberToRegister.PersonalNumber)
-                {
-                    throw new ArgumentException("A member with specified personal number already exists");
-                }
-                else if (m.MemberId == memberToRegister.MemberId)
+                if (m.MemberId == memberToRegister.MemberId)
                 {
                     throw new ArgumentException("A member with specified memberId already exists");
+                }
+                else if (m.PersonalNumber == memberToRegister.PersonalNumber)
+                {
+                    throw new ArgumentException("A member with specified personal number already exists");
                 }
             }
             _members.Add(memberToRegister);
         }
 
+        // Return the member if memberId match or return null if there's a member with the specified id
         public Member GetMemberById(int memberId)
         {
             foreach(Member m in _members)
@@ -52,14 +55,14 @@ namespace YachtClub.model
             return null;
         }
 
-
+        // Delete the specified member to delete from the memberlist
         public void DeleteMember(Member memberToDelete)
         {
             try
             {
                 foreach (Member m in _members)
                 {
-                    if (m.MemberId == memberToDelete.MemberId)
+                    if (m == memberToDelete)
                     {
                         _members.Remove(memberToDelete);
                     }
@@ -71,11 +74,13 @@ namespace YachtClub.model
             }
         }
 
+        // Update memberlist after modifications to the list
         public void SaveMemberList()
         {
             _mDAL.Save();
         }
 
+        // Refresh the list after a modification was made to make sure the memberlistview is sorted by id
         public void UpdateList()
         {
             _members = _mDAL.GetAll();

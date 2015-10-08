@@ -178,7 +178,7 @@ namespace YachtClub.controller
                 {
                     _list.DeleteMember(member);
                     _list.SaveMemberList();
-                    DoStartMenu();
+                    DoMemberList(_listView.GetLastView());
                 }
                 else
                 {
@@ -237,7 +237,7 @@ namespace YachtClub.controller
                 try
                 {
                     // Perhaps a bad practise for methods to have two kinds of responsabilities? (ex: write some lines & get input, return boat)
-                    model.Boat boatToEdit = _boatView.GetBoatToEdit(member);
+                    model.Boat boatToEdit = _boatView.GetBoatToEditOrDelete(member, "edit");
                     double newLength = _boatView.GetNewLengthFromUser();
                     boatToEdit.ChangeLength(newLength);
                     _list.SaveMemberList();
@@ -270,7 +270,7 @@ namespace YachtClub.controller
             {
                 try
                 {
-                    model.Boat boatToDelete = _boatView.GetBoatToDelete(member);
+                    model.Boat boatToDelete = _boatView.GetBoatToEditOrDelete(member, "delete");
                     if (_boatView.ConfirmDelete() == true)
                     {
                         member.DeleteBoat(boatToDelete);
