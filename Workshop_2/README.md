@@ -11,10 +11,9 @@
 - Sequence diagrams can be found in the sequence-diagrams.md or the folder raw.
  - I covered add member and view specific member.
 
-## Installation:
+## Initiation:
 - I wrote a console application with Visual Studio
 
-1. Download YachtClub.rar or the .zip and unpack.
-2. You can find the project with the vs.solution and .exe file.
-3. Launch the exe file to test the application.
-4. Or launch it from the solution.
+1. Clone the repo.
+2. Use the md files for class diagrams and sequence diagrams or view them inside the diagrams folder.
+3. The project with the vs.solution and .exe file are located inside the folder YachtClub.

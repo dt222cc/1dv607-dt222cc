@@ -6,9 +6,9 @@
 - I covered add member and view specific member, display startmenu is in it aswell, as the starting point
 
 ## View specific member
-![view-member-sequence](raw/sequence-viewSpecificMember.png)
+![view-member-sequence](diagrams/sequence-viewSpecificMember.png)
 
 -------------------------------------------------
 
 ## Add member
-![add-member-sequence](raw/sequence-addMember.png)
+![add-member-sequence](diagrams/sequence-addMember.png)
