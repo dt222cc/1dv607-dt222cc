@@ -21,7 +21,7 @@ namespace YachtClub.view
 
         public void RenderChoices(int min, int max)
         {
-            Console.WriteLine("-----------------------------------");
+            //Console.WriteLine("-----------------------------------");
             Console.Write(" Enter menu choice [{0}-{1}] : ", min, max);
         }
 
@@ -42,15 +42,14 @@ namespace YachtClub.view
             Console.ReadKey();
         }
 
-        // The following methods could be refactored to a different class
+        // The following methods could be refactored to a different class because only the controller use these
         public void DisplayErrorMessage(string errorMessage)
         {
-            Console.WriteLine("-----------------------------------");
+            //Console.WriteLine("-----------------------------------");
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(" {0}\n", errorMessage);
             Console.ResetColor();
         }
-
 
         public bool DoesUserWantsToQuit()
         {

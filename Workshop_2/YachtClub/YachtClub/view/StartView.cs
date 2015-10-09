@@ -8,7 +8,6 @@ namespace YachtClub.view
 {
     class StartView: BaseView
     {
-        // The startmenu has these choices
         public enum StartMenuOperation
         {
             ExitApplication,
@@ -22,11 +21,12 @@ namespace YachtClub.view
 
         public void DisplayStartMenu()
         {
-            RenderWindow("          Happy YachtClub          ");
+            RenderWindow("         The Happy Pirate          ");
             Console.WriteLine(" 0. Exit                           ");
             Console.WriteLine(" 1. Show members in a compact view ");
             Console.WriteLine(" 2. Show members in a verbose view ");
             Console.WriteLine(" 3. Add a new user                 ");
+            Console.WriteLine("-----------------------------------");
         }
         
         // Get the startmenu choice from user, must be integer and within the allowed parameters
@@ -57,39 +57,29 @@ namespace YachtClub.view
             } while (true);
         }
 
-        // The start of member registration
-        public int GetMemberIdFromUser()
-        {
-            Console.WriteLine("-----------------------------------");
-            Console.WriteLine(" Member registration\n");
-            Console.Write(" MemberId       : ");
-            try
-            {
-                return int.Parse(Console.ReadLine());
-            }
-            catch
-            {
-                return 0; // Force 0 coz the validation of creating a new member kicks in instead
-            }
-        }
-
+        // Could be more simple, just "view"
         public string GetStringFromUser(bool isName)
         {
+            string input = "";
             if (isName == true)
             {
+                Console.WriteLine(" Member registration\n");
                 Console.Write(" Name           : ");
+                input = Console.ReadLine();
             }
             else
             {
                 Console.Write(" Personal number: ");
+                input = Console.ReadLine();
+                Console.WriteLine("-----------------------------------");
             }
-            return Console.ReadLine();
+            return input;
         }
 
         public void GetByeMessage()
         {
             DisplayStartMenu();
-            Console.Write("\n Goodbye! ");
+            Console.Write(" Goodbye! ");
         }
     }
 }

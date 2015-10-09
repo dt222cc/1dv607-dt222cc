@@ -30,16 +30,26 @@ namespace YachtClub.model
         {
             foreach (Member m in _members)
             {
-                if (m.MemberId == memberToRegister.MemberId)
-                {
-                    throw new ArgumentException("A member with specified memberId already exists");
-                }
-                else if (m.PersonalNumber == memberToRegister.PersonalNumber)
+                if (m.PersonalNumber == memberToRegister.PersonalNumber)
                 {
                     throw new ArgumentException("A member with specified personal number already exists");
                 }
             }
             _members.Add(memberToRegister);
+        }
+
+        public int GetUniqueMemberId()
+        {
+            int newId = 0;
+
+            foreach (Member m in _members)
+            {
+                if (m.MemberId > newId)
+                {
+                    newId = m.MemberId;
+                }
+            }
+            return newId + 1;
         }
 
         // Return the member if memberId match or return null if there's a member with the specified id
@@ -58,20 +68,7 @@ namespace YachtClub.model
         // Delete the specified member to delete from the memberlist
         public void DeleteMember(Member memberToDelete)
         {
-            try
-            {
-                foreach (Member m in _members)
-                {
-                    if (m == memberToDelete)
-                    {
-                        _members.Remove(memberToDelete);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            _members.Remove(memberToDelete);
         }
 
         // Update memberlist after modifications to the list

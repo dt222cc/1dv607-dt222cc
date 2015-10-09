@@ -12,7 +12,6 @@ namespace YachtClub.view
 
         private model.MemberList _list;
 
-        // Dependent of the MemberList
         public MemberListView(model.MemberList memberList)
         {
             _list = memberList;
@@ -30,41 +29,50 @@ namespace YachtClub.view
             { 
                 RenderWindow("            Verbose View           ");
             }
-            Console.WriteLine(" 0    Go back");
 
-            if (pickedCompactList == true)
-            {
-                Console.WriteLine("-----------------------------------");
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine(" {0,-4} {1,-20} {2,7}", "Id", "Name", "Boats");
-                Console.ResetColor();
-
-                foreach (model.Member m in _list.Members)
-                {
-                    Console.WriteLine(" {0,-4} {1,-20} {2,5}", m.MemberId, m.Name, m.Boats.Count());
-                }
+            if (_list.Members.Count() == 0) {
+                DisplayErrorMessage("List is empty, input 0 to exit");
             }
             else
             {
-                foreach (model.Member m in _list.Members)
+                if (pickedCompactList == true)
                 {
-                    Console.WriteLine("-----------------------------------");
-                    Console.WriteLine(" {0,-4} {1,-16} {2,12}", m.MemberId, m.Name, m.PersonalNumber);
-                    if (m.Boats.Count() >= 1)
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine(" {0,-4} {1,-20} {2,7}", "Id", "Name", "Boats");
+                    Console.ResetColor();
+
+                    foreach (model.Member m in _list.Members)
                     {
-                        Console.WriteLine("      ............................. ");
-                    }
-                    foreach (model.Boat b in m.Boats)
-                    {
-                        Console.WriteLine("      {0,-12}{1,5}{2,12:d}", b.Type, b.Length + "m", b.RegistrationDate);
+                        Console.WriteLine(" {0,-4} {1,-20} {2,5}", m.MemberId, m.Name, m.Boats.Count());
                     }
                 }
+                else
+                {
+                    foreach (model.Member m in _list.Members)
+                    {
+                        Console.WriteLine("-----------------------------------");
+                        Console.Write(" {0,-4}", m.MemberId);
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine(" {0}", m.Name);
+                        Console.ResetColor();
+                        Console.WriteLine(" {0,16}", m.PersonalNumber);
+                        if (m.Boats.Count() >= 1)
+                        {
+                            Console.WriteLine("      ............................. ");
+                        }
+                        foreach (model.Boat b in m.Boats)
+                        {
+                            Console.WriteLine("      {0,-12}{1,5}{2,12:d}", b.Type, b.Length + "m", b.RegistrationDate);
+                        }
+                    }
+                }
+                Console.WriteLine("-----------------------------------");
+                Console.WriteLine(" 0: Go back");
+                Console.WriteLine("-----------------------------------");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(" {0}: ", message);
+                Console.ResetColor();
             }
-
-            Console.WriteLine("-----------------------------------");
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write(" {0}: ", message);
-            Console.ResetColor();
         }
 
         // Loop until a valid input was made, integer

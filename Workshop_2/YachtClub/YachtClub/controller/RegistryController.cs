@@ -26,89 +26,68 @@ namespace YachtClub.controller
         // Handle StartMenu related operations (Display startmenu, register member)
         public void DoStartMenu()
         {
-            try
-            {
-                _startView.DisplayStartMenu();
+            _startView.DisplayStartMenu();
 
-                switch (_startView.GetStartMenuChoice())
-                {
-                    case view.StartView.StartMenuOperation.AddMember:
-                        AddMember();
-                        break;
-                    case view.StartView.StartMenuOperation.ListMembersCompact:
-                        DoMemberList(true);
-                        break;
-                    case view.StartView.StartMenuOperation.ListMembersVerbose:
-                        DoMemberList(false);
-                        break;
-                    case view.StartView.StartMenuOperation.ExitApplication:
-                        _startView.GetByeMessage();
-                        return;
-                }
-            }
-            catch (Exception ex)
+            switch (_startView.GetStartMenuChoice())
             {
-                Console.WriteLine(ex.Message);
+                case view.StartView.StartMenuOperation.AddMember:
+                    AddMember();
+                    break;
+                case view.StartView.StartMenuOperation.ListMembersCompact:
+                    DoMemberList(true);
+                    break;
+                case view.StartView.StartMenuOperation.ListMembersVerbose:
+                    DoMemberList(false);
+                    break;
+                case view.StartView.StartMenuOperation.ExitApplication:
+                    _startView.GetByeMessage();
+                    return;
             }
         }
 
         // Handle MemberListView related operations (Display list view, get specific member)
         private void DoMemberList(bool pickedCompactList)
         {
-            try
-            {
-                _list.UpdateList(); // optional
-                _listView.DisplayMemberListView(pickedCompactList);
+            _list.UpdateList(); // optional
+            _listView.DisplayMemberListView(pickedCompactList);
 
-                // Display memberview or go back to startmenu
-                int memberId = _listView.GetUserInput();
-                if (memberId == 0)
-                {
-                    DoStartMenu();
-                }
-                else
-                {
-                    DoMemberView(_list.GetMemberById(memberId));
-                }
-            }
-            catch (Exception ex)
+            // Display memberview or go back to startmenu
+            int memberId = _listView.GetUserInput();
+            if (memberId == 0)
             {
-                Console.WriteLine(ex.Message); // can be removed i think (used to check code during implementation)
+                DoStartMenu();
+            }
+            else
+            {
+                DoMemberView(_list.GetMemberById(memberId));
             }
         }
 
         // Handle MemberView related operations (Display member, member/boat operations)
         private void DoMemberView(model.Member member)
         {
-            try
-            {
-                _memberView.DisplayMember(member);
+            _memberView.DisplayMember(member);
 
-                switch (_memberView.GetMemberOperation())
-                {
-                    case view.MemberView.MemberOperation.EditMember:
-                        EditMember(member);
-                        break;
-                    case view.MemberView.MemberOperation.DeleteMember:
-                        DeleteMember(member);
-                        break;
-                    case view.MemberView.MemberOperation.AddBoat:
-                        AddBoat(member);
-                        break;
-                    case view.MemberView.MemberOperation.EditBoat:
-                        EditBoat(member);
-                        break;
-                    case view.MemberView.MemberOperation.DeleteBoat:
-                        DeleteBoat(member);
-                        break;
-                    case view.MemberView.MemberOperation.GoBack:
-                        DoMemberList(_listView.GetLastView());
-                        return;
-                }
-            }
-            catch (Exception ex)
+            switch (_memberView.GetMemberOperation())
             {
-                Console.WriteLine(ex.Message);
+                case view.MemberView.MemberOperation.EditMember:
+                    EditMember(member);
+                    break;
+                case view.MemberView.MemberOperation.DeleteMember:
+                    DeleteMember(member);
+                    break;
+                case view.MemberView.MemberOperation.AddBoat:
+                    AddBoat(member);
+                    break;
+                case view.MemberView.MemberOperation.EditBoat:
+                    EditBoat(member);
+                    break;
+                case view.MemberView.MemberOperation.DeleteBoat:
+                    DeleteBoat(member);
+                    break;
+                case view.MemberView.MemberOperation.GoBack:
+                    DoMemberList(_listView.GetLastView());
+                    return;
             }
         }
 
@@ -119,7 +98,7 @@ namespace YachtClub.controller
             try
             {
                 _startView.DisplayStartMenu();
-                int memberId = _startView.GetMemberIdFromUser(); // More ideal to remove this and have it automated
+                int memberId = _list.GetUniqueMemberId();
                 string name = _startView.GetStringFromUser(true);
                 string personalNumber = _startView.GetStringFromUser(false);
                 model.Member member = new model.Member(memberId, name, personalNumber); // Throws exception if fail
@@ -130,7 +109,6 @@ namespace YachtClub.controller
             // Using catch do display error messages to user
             catch (Exception ex)
             {
-                _startView.DisplayStartMenu();
                 _startView.DisplayErrorMessage(ex.Message);
                 if (_startView.DoesUserWantsToQuit() == true)
                 {
@@ -156,7 +134,6 @@ namespace YachtClub.controller
             }
             catch (Exception ex)
             {
-                _memberView.DisplayMember(member);
                 _memberView.DisplayErrorMessage(ex.Message);
                 if (_memberView.DoesUserWantsToQuit() == true)
                 {
@@ -201,7 +178,7 @@ namespace YachtClub.controller
             try
             {
                 _memberView.DisplayMember(member);
-                model.Boat.BoatType type = _boatView.GetTypeFromUser();
+                model.BoatType type = _boatView.GetTypeFromUser();
                 double length = _boatView.GetLengthFromUser();
                 DateTime registrationDate = _boatView.GetRegistrationDate();
                 model.Boat boat = new model.Boat(type, length, registrationDate);

@@ -9,32 +9,32 @@ namespace YachtClub.view
     class BoatView: BaseView
     {
         // A quick (bad) solution / some kind of loop would be better (not so experienced with enums yet)
-        public model.Boat.BoatType GetTypeFromUser()
+        public model.BoatType GetTypeFromUser()
         {
             Console.WriteLine("-----------------------------------");
             Console.WriteLine(" Boat categories/types");
-            Console.WriteLine(" 1. {0}", model.Boat.BoatType.Sailboat);
-            Console.WriteLine(" 2. {0}", model.Boat.BoatType.Motorsailer);
-            Console.WriteLine(" 3. {0}", model.Boat.BoatType.Canoe);
-            Console.WriteLine(" 4. {0}", model.Boat.BoatType.Other);
+            Console.WriteLine(" 1. {0}", model.BoatType.Sailboat);
+            Console.WriteLine(" 2. {0}", model.BoatType.Motorsailer);
+            Console.WriteLine(" 3. {0}", model.BoatType.Canoe);
+            Console.WriteLine(" 4. {0}", model.BoatType.Other);
             Console.Write("\n -Pick boat category/type: ");
 
             string keyPressed = Console.ReadLine();
             if (keyPressed == "1")
             {
-                return model.Boat.BoatType.Sailboat;
+                return model.BoatType.Sailboat;
             }
             else if (keyPressed == "2")
             {
-                return model.Boat.BoatType.Motorsailer;
+                return model.BoatType.Motorsailer;
             }
             else if (keyPressed == "3")
             {
-                return model.Boat.BoatType.Canoe;
+                return model.BoatType.Canoe;
             }
             else if (keyPressed == "4")
             {
-                return model.Boat.BoatType.Canoe;
+                return model.BoatType.Canoe;
             }
             else
             {

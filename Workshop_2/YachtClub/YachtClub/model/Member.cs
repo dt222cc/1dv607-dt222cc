@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace YachtClub.model
@@ -13,22 +14,12 @@ namespace YachtClub.model
         private string _personalNumber;
         private List<Boat> _boats = new List<Boat>();
 
-        // Placeholder, might want to have this made auto (it should be auto),
-        // with a persistence counter somewhere (to have a track of total registrations made)
         public int MemberId
         {
             get { return _memberId; }
-            set
-            {
-                if (value <= 0 || value > 9999)
-                {
-                    throw new ArgumentException("MemberId needs to be 1 or higher");
-                }
-                _memberId = value;
-            }
+            set { _memberId = value; }
         }
 
-        // The name's max cap should be increased, I just had it capped to match with the UI :D
         public string Name
         {
             get { return _name; }
@@ -37,10 +28,6 @@ namespace YachtClub.model
                 if (value.Length < 2)
                 {
                     throw new ArgumentException("Name has too few characters, at least 2 characters");
-                }
-                else if (value.Length > 20) // Change this
-                {
-                    throw new ArgumentException("Name has too many characters, maximum of 20 characters");
                 }
                 _name = value;
             }
@@ -52,13 +39,15 @@ namespace YachtClub.model
             get { return _personalNumber; }
             set
             {
-                if (value.Length <= 12 && value.Length > 0 && System.Text.RegularExpressions.Regex.IsMatch(value, @"^\d+$") == true)
+                Match m = Regex.Match(value, @"(\d{2})?(\d{6})-?(\d{4})");
+               
+                if(m.Success)
                 {
-                        _personalNumber = value;
+                    _personalNumber = m.Groups[2] + "-" + m.Groups[3];
                 }
                 else
                 {
-                    throw new ArgumentException("PersonalNumber/BirthDate is not in a valid format");
+                    throw new ArgumentException("Personal number is not in a valid format [YYMMDD-NNNN]");
                 }
             }
         }
@@ -77,39 +66,16 @@ namespace YachtClub.model
             PersonalNumber = personalNumber;
         }
 
-        // Try to add the boat if it's "different" (subject to changes)
+        // Add boat to the member's boatlist, can have similar boat type and size
         public void AddBoat(Boat boatToRegister)
         {
-            foreach (Boat b in _boats)
-            {
-                // Note: A boat can have same type and length and still be a "different" boat.
-                // Well each boat probably have some kind of identification.
-                if (b.Type == boatToRegister.Type &&
-                    b.Length == boatToRegister.Length)
-                {
-                    throw new ArgumentException("Boat is already registered");
-                }
-            }
             _boats.Add(boatToRegister);
         }
 
         // Delete the specified boat from the member's boatlist
         public void DeleteBoat(Boat boatToDelete)
         {
-            try
-            {
-                foreach (Boat b in _boats)
-                {
-                    if (b == boatToDelete)
-                    {
-                        _boats.Remove(boatToDelete);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            _boats.Remove(boatToDelete);
         }
 
         // Change a member's name, probably not the ideal way of doing things (i'm not so experienced)
