@@ -11,6 +11,7 @@
 -------------------------------------------------
 
 ## MVC, Structure of the application:
+note: inheritance arrow direction is point at the wrong direction :D
 ![mvc-class-diagram-1](diagrams/class-diagram-mvc.png)
 
 ## MVC, (Same diagram):
