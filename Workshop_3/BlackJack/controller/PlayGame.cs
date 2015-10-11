@@ -7,34 +7,43 @@ namespace BlackJack.controller
 {
     class PlayGame
     {
-        public bool Play(model.Game a_game, view.IView a_view)
+        private model.Game _game;
+        private view.IView _view;
+
+        public PlayGame(model.Game a_game, view.IView a_view)
         {
-            a_view.DisplayWelcomeMessage();
-            
-            a_view.DisplayDealerHand(a_game.GetDealerHand(), a_game.GetDealerScore());
-            a_view.DisplayPlayerHand(a_game.GetPlayerHand(), a_game.GetPlayerScore());
+            _game = a_game;
+            _view = a_view;
+        }
 
-            if (a_game.IsGameOver())
+        public bool Play()
+        {
+            _view.DisplayWelcomeMessage();
+
+            _view.DisplayDealerHand(_game.GetDealerHand(), _game.GetDealerScore());
+            _view.DisplayPlayerHand(_game.GetPlayerHand(), _game.GetPlayerScore());
+
+            if (_game.IsGameOver())
             {
-                a_view.DisplayGameOver(a_game.IsDealerWinner());
+                _view.DisplayGameOver(_game.IsDealerWinner());
             }
 
-            int input = a_view.GetInput();
+            view.Event e = _view.GetEvent();
 
-            if (input == 'p')
-            {
-                a_game.NewGame();
+            switch(e) {
+                case view.Event.Start:
+                    _game.NewGame();
+                    break;
+                case view.Event.Hit:
+                    _game.Hit();
+                    break;
+                case view.Event.Stand:
+                    _game.Stand();
+                    break;
+                case view.Event.Quit:
+                    return false;
             }
-            else if (input == 'h')
-            {
-                a_game.Hit();
-            }
-            else if (input == 's')
-            {
-                a_game.Stand();
-            }
-
-            return input != 'q';
+            return true;
         }
     }
 }

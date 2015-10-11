@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BlackJack.view
 {
-    class SwedishView : IView 
+    class SwedishView : CommonView, IView
     {
         public void DisplayWelcomeMessage()
         {
@@ -14,10 +14,7 @@ namespace BlackJack.view
             System.Console.WriteLine("----------------------");
             System.Console.WriteLine("Skriv 'p' för att Spela, 'h' för nytt kort, 's' för att stanna 'q' för att avsluta\n");
         }
-        public int GetInput()
-        {
-            return System.Console.In.Read();
-        }
+
         public void DisplayCard(model.Card a_card)
         {
             if (a_card.GetColor() == model.Card.Color.Hidden)
@@ -33,14 +30,17 @@ namespace BlackJack.view
                 System.Console.WriteLine("{0} {1}", colors[(int)a_card.GetColor()], values[(int)a_card.GetValue()]);
             }
         }
+
         public void DisplayPlayerHand(IEnumerable<model.Card> a_hand, int a_score)
         {
             DisplayHand("Spelare", a_hand, a_score);
         }
+
         public void DisplayDealerHand(IEnumerable<model.Card> a_hand, int a_score)
         {
             DisplayHand("Croupier", a_hand, a_score);
         }
+
         public void DisplayGameOver(bool a_dealerIsWinner)
         {
             System.Console.Write("Slut: ");

@@ -5,19 +5,13 @@ using System.Text;
 
 namespace BlackJack.view
 {
-    class SimpleView : IView
+    class SimpleView : CommonView, IView
     {
-
         public void DisplayWelcomeMessage()
         {
             System.Console.Clear();
             System.Console.WriteLine("Hello Black Jack World");
             System.Console.WriteLine("Type 'p' to Play, 'h' to Hit, 's' to Stand or 'q' to Quit\n");
-        }
-
-        public int GetInput()
-        {
-            return System.Console.In.Read();
         }
 
         public void DisplayCard(model.Card a_card)
