@@ -45,11 +45,15 @@ namespace BlackJack.view
             System.Console.Write("GameOver: ");
             if (a_dealerIsWinner)
             {
+                System.Console.ForegroundColor = ConsoleColor.Red;
                 System.Console.WriteLine("Dealer Won!");
+                System.Console.ResetColor();
             }
             else
             {
+                System.Console.ForegroundColor = ConsoleColor.Green;
                 System.Console.WriteLine("You Won!");
+                System.Console.ResetColor();
             }
             
         }
