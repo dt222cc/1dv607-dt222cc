@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
   dslVersion="1.0.0.0"
   Id="c453c530-6efa-4957-9d62-7cca90019d1a"
   name="rules" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
@@ -63,7 +63,7 @@
         isActiveClass="false">
         <suppliersInternal>
           <interfaceRealization
-            Id="85e6fc98-3aea-44e0-8816-8ba246381186">
+            Id="7f55401a-9e3f-4c86-a2e1-375edfc71473">
             <interfaceMoniker
               Id="7f7445a6-4eaf-4d4b-893c-5243754ba636"
               LastKnownName="INewGameStrategy"
@@ -101,6 +101,88 @@
               LastKnownName="BasicHitStrategy"
               LastKnownLocation="Package2_0950.uml" />
           </dependency>
+          <dependency
+            Id="ca4da0d8-2c97-4c20-9395-6df96531ed46">
+            <classMoniker
+              Id="280cf082-4683-4f0a-ac0e-ca060e1b0631"
+              LastKnownName="Soft17HitStrategy"
+              LastKnownLocation="Package2_0950.uml" />
+          </dependency>
+          <dependency
+            Id="17f3257a-4c67-4f2a-bb04-eb4aa9e940c8">
+            <classMoniker
+              Id="7c8e7f0d-9a1d-4b98-967f-dce5738e2895"
+              LastKnownName="EqualScoreDealerWinStrategy"
+              LastKnownLocation="Package2_0950.uml" />
+          </dependency>
+          <dependency
+            Id="3fd9ce18-274c-488c-8f80-7ab16c2051aa">
+            <classMoniker
+              Id="1b01838f-cfbc-4f2f-be73-603aa4eb8332"
+              LastKnownName="EqualScorePlayerWinStrategy"
+              LastKnownLocation="Package2_0950.uml" />
+          </dependency>
+        </suppliersInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="280cf082-4683-4f0a-ac0e-ca060e1b0631"
+        name="Soft17HitStrategy"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <interfaceRealization
+            Id="e9eb5db2-6723-40d6-9b35-382315356c07">
+            <interfaceMoniker
+              Id="550cd927-6beb-4715-ac7e-1afec083ec6b"
+              LastKnownName="IHitStrategy"
+              LastKnownLocation="Package2_0950.uml" />
+          </interfaceRealization>
+        </suppliersInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="8f0029dc-6449-4206-a3f2-a17cbe725cec"
+        name="IEqualScoreWinStrategy"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="1b01838f-cfbc-4f2f-be73-603aa4eb8332"
+        name="EqualScorePlayerWinStrategy"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <interfaceRealization
+            Id="14212a70-eb49-451b-845b-712e5c07057d">
+            <interfaceMoniker
+              Id="8f0029dc-6449-4206-a3f2-a17cbe725cec"
+              LastKnownName="IEqualScoreWinStrategy"
+              LastKnownLocation="Package2_0950.uml" />
+          </interfaceRealization>
+        </suppliersInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="7c8e7f0d-9a1d-4b98-967f-dce5738e2895"
+        name="EqualScoreDealerWinStrategy"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <interfaceRealization
+            Id="1bcb2511-4f80-4426-b65b-548a5a425aa5">
+            <interfaceMoniker
+              Id="8f0029dc-6449-4206-a3f2-a17cbe725cec"
+              LastKnownName="IEqualScoreWinStrategy"
+              LastKnownLocation="Package2_0950.uml" />
+          </interfaceRealization>
         </suppliersInternal>
       </class>
     </packageHasNamedElement>
