@@ -7,7 +7,6 @@ namespace BlackJack.model.rules
 {
     class InternationalNewGameStrategy : INewGameStrategy
     {
-
         public bool NewGame(Deck a_deck, Dealer a_dealer, Player a_player)
         {
             a_dealer.GetNewCard(a_player, true);
