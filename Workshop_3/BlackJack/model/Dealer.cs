@@ -7,8 +7,10 @@ namespace BlackJack.model
 {
     class Dealer : Player
     {
-        private Deck m_deck = null;
         private const int g_maxScore = 21;
+
+        private Deck m_deck = null;
+        private List<IBlackJackObserver> m_observers = new List<IBlackJackObserver>();
 
         private rules.INewGameStrategy m_newGameRule;
         private rules.IHitStrategy m_hitRule;
@@ -83,11 +85,20 @@ namespace BlackJack.model
             return false;
         }
 
-        public void GetNewCard(Player player, bool showCard)
+        public void GetNewCard(Player a_player, bool a_showCard)
         {
+            foreach (IBlackJackObserver a_observer in m_observers)
+            {
+                a_observer.AddCardDelay();
+            }
             Card c = m_deck.GetCard();
-            c.Show(showCard);
-            player.DealCard(c);
+            c.Show(a_showCard);
+            a_player.DealCard(c);
+        }
+
+        public void AddObserver(IBlackJackObserver a_observer)
+        {
+            m_observers.Add(a_observer);
         }
     }
 }

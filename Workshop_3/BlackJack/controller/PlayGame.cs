@@ -5,45 +5,58 @@ using System.Text;
 
 namespace BlackJack.controller
 {
-    class PlayGame
+    class PlayGame : IBlackJackObserver
     {
-        private model.Game _game;
-        private view.IView _view;
+        private model.Game m_game;
+        private view.IView m_view;
 
         public PlayGame(model.Game a_game, view.IView a_view)
         {
-            _game = a_game;
-            _view = a_view;
+            m_game = a_game;
+            m_view = a_view;
+
+            m_game.AddObserver(this);
+        }
+
+        public void AddCardDelay()
+        {
+            DisplayGame();
+            System.Threading.Thread.Sleep(1000);
         }
 
         public bool Play()
         {
-            _view.DisplayWelcomeMessage();
+            DisplayGame();
 
-            _view.DisplayDealerHand(_game.GetDealerHand(), _game.GetDealerScore());
-            _view.DisplayPlayerHand(_game.GetPlayerHand(), _game.GetPlayerScore());
-
-            if (_game.IsGameOver())
-            {
-                _view.DisplayGameOver(_game.IsDealerWinner());
-            }
-
-            view.Event e = _view.GetEvent();
+            view.Event e = m_view.GetEvent();
 
             switch(e) {
                 case view.Event.Start:
-                    _game.NewGame();
+                    m_game.NewGame();
                     break;
                 case view.Event.Hit:
-                    _game.Hit();
+                    m_game.Hit();
                     break;
                 case view.Event.Stand:
-                    _game.Stand();
+                    m_game.Stand();
                     break;
                 case view.Event.Quit:
                     return false;
             }
             return true;
+        }
+
+        private void DisplayGame()
+        {
+            m_view.DisplayWelcomeMessage();
+
+            m_view.DisplayDealerHand(m_game.GetDealerHand(), m_game.GetDealerScore());
+            m_view.DisplayPlayerHand(m_game.GetPlayerHand(), m_game.GetPlayerScore());
+
+            if (m_game.IsGameOver())
+            {
+                m_view.DisplayGameOver(m_game.IsDealerWinner());
+            }
         }
     }
 }

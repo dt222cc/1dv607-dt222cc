@@ -60,5 +60,10 @@ namespace BlackJack.model
         {
             return m_player.CalcScore();
         }
+
+        public void AddObserver(IBlackJackObserver observer)
+        {
+            m_dealer.AddObserver(observer);
+        }
     }
 }
