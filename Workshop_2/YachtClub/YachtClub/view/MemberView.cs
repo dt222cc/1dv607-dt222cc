@@ -21,20 +21,17 @@ namespace YachtClub.view
         private const int _maxKey = 5;
         private const int _minKey = 0;
 
-        private model.Member _member;
-
         public void DisplayMember(model.Member member)
         {
-            _member = member;
-            if (_member != null)
+            if (member != null)
             {
                 RenderWindow("          Member details           ");
-                Console.WriteLine(" MemberId        : {0}", _member.MemberId);
-                Console.WriteLine(" Name            : {0}", _member.Name);
-                Console.WriteLine(" Personal number : {0}", _member.PersonalNumber);
+                Console.WriteLine(" MemberId        : {0}", member.MemberId);
+                Console.WriteLine(" Name            : {0}", member.Name);
+                Console.WriteLine(" Personal number : {0}", member.PersonalNumber);
                 Console.WriteLine("-----------------------------------");
 
-                if (_member.Boats.Count() == 0)
+                if (member.Boats.Count() == 0)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine(" Member has no registered boats");
@@ -48,7 +45,7 @@ namespace YachtClub.view
                     Console.ResetColor();
                     
                     int count = 1;
-                    foreach (model.Boat b in _member.Boats)
+                    foreach (model.Boat b in member.Boats)
                     {
                         Console.WriteLine("    ..............................");
                         Console.WriteLine(" {0}. Type              : {1}", count++, b.Type);
@@ -73,29 +70,22 @@ namespace YachtClub.view
         {
             do
             {
-                try
+                RenderChoices(_minKey, _maxKey);
+                int keyPressed = GetMenuChoiceFromUser(_minKey, _maxKey);
+                switch (keyPressed)
                 {
-                    RenderChoices(_minKey, _maxKey);
-                    int keyPressed = GetMenuChoiceFromUser(_minKey, _maxKey);
-                    switch (keyPressed)
-                    {
-                        case 0:
-                            return MemberOperation.GoBack;
-                        case 1:
-                            return MemberOperation.EditMember;
-                        case 2:
-                            return MemberOperation.DeleteMember;
-                        case 3:
-                            return MemberOperation.AddBoat;
-                        case 4:
-                            return MemberOperation.EditBoat;
-                        case 5:
-                            return MemberOperation.DeleteBoat;
-                    }
-                }
-                catch
-                {
-                    DisplayMember(_member);
+                    case 0:
+                        return MemberOperation.GoBack;
+                    case 1:
+                        return MemberOperation.EditMember;
+                    case 2:
+                        return MemberOperation.DeleteMember;
+                    case 3:
+                        return MemberOperation.AddBoat;
+                    case 4:
+                        return MemberOperation.EditBoat;
+                    case 5:
+                        return MemberOperation.DeleteBoat;
                 }
             } while (true);
         }

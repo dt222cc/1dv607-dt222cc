@@ -12,6 +12,8 @@ namespace YachtClub.view
 
         private model.MemberList _list;
 
+        // I Could or perhaps should remove this dependency to an association
+        //(have to alter line 94 and lines 105,109 and update the)
         public MemberListView(model.MemberList memberList)
         {
             _list = memberList;

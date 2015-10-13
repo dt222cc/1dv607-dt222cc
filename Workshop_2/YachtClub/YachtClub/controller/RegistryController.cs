@@ -48,7 +48,7 @@ namespace YachtClub.controller
         // Handle MemberListView related operations (Display list view, get specific member)
         private void DoMemberList(bool pickedCompactList)
         {
-            _list.UpdateList(); // optional
+            _list.GetMemberList(); // optional
             _listView.DisplayMemberListView(pickedCompactList);
 
             // Display memberview or go back to startmenu
@@ -68,26 +68,33 @@ namespace YachtClub.controller
         {
             _memberView.DisplayMember(member);
 
-            switch (_memberView.GetMemberOperation())
+            try
             {
-                case view.MemberView.MemberOperation.EditMember:
-                    EditMember(member);
-                    break;
-                case view.MemberView.MemberOperation.DeleteMember:
-                    DeleteMember(member);
-                    break;
-                case view.MemberView.MemberOperation.AddBoat:
-                    AddBoat(member);
-                    break;
-                case view.MemberView.MemberOperation.EditBoat:
-                    EditBoat(member);
-                    break;
-                case view.MemberView.MemberOperation.DeleteBoat:
-                    DeleteBoat(member);
-                    break;
-                case view.MemberView.MemberOperation.GoBack:
-                    DoMemberList(_listView.GetLastView());
-                    return;
+                switch (_memberView.GetMemberOperation())
+                {
+                    case view.MemberView.MemberOperation.EditMember:
+                        EditMember(member);
+                        break;
+                    case view.MemberView.MemberOperation.DeleteMember:
+                        DeleteMember(member);
+                        break;
+                    case view.MemberView.MemberOperation.AddBoat:
+                        AddBoat(member);
+                        break;
+                    case view.MemberView.MemberOperation.EditBoat:
+                        EditBoat(member);
+                        break;
+                    case view.MemberView.MemberOperation.DeleteBoat:
+                        DeleteBoat(member);
+                        break;
+                    case view.MemberView.MemberOperation.GoBack:
+                        DoMemberList(_listView.GetLastView());
+                        return;
+                }
+            }
+            catch (Exception)
+            {
+                DoMemberView(member);
             }
         }
 

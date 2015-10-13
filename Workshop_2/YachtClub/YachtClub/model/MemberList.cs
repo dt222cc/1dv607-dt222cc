@@ -22,7 +22,7 @@ namespace YachtClub.model
         // Get all the members and the members' boats from the "textfile"
         public MemberList()
         {
-            _members = _mDAL.GetAll();
+            GetMemberList();
         }
 
         // Try to add the member to the register but validates the id and the ssn/pn, before that happens
@@ -78,7 +78,7 @@ namespace YachtClub.model
         }
 
         // Refresh the list after a modification was made to make sure the memberlistview is sorted by id
-        public void UpdateList()
+        public void GetMemberList()
         {
             _members = _mDAL.GetAll();
         }
