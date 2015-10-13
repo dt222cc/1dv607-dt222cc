@@ -1,0 +1,19 @@
+title Sequence: View specifc member
+
+Program->+RegistryController: DoStartMenu()
+RegistryController->StartView: DisplayStartMenu()
+RegistryController->StartView: GetStartMenuChoice()
+
+note right of RegistryController: Case: ListMembersCompact
+RegistryController->+RegistryController: \nDoMemberList(bool \npickedCompactList)
+
+RegistryController->MemberListView: DisplayMemberListView(pickedCompactList)
+RegistryController->MemberListView: memberId = GetUserInput()
+RegistryController->MemberList: Member member = GetMemberById(memberId)
+
+alt successful case
+RegistryController->MemberView: DoMemberView(member)
+else some kind of failure
+RegistryController->StartView: if(memberId == 0)\nDoStartMenu()
+RegistryController->MemberListView: else if(invalid input or memberId)\nDisplayMemberListView(pickedCompactList, errorMessage)
+end

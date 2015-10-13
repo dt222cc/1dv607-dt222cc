@@ -12,4 +12,4 @@
 ![class-diagram](diagrams/class-diagram.png)
 
 ## Class diagram 2:
-![latest-class-diagram](diagrams/updatedClassDiagram.png)
+![class-diagram-2](diagrams/class-diagram-2.png)

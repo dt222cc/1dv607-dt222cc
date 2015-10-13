@@ -1,0 +1,26 @@
+title Sequence: Add member
+
+Program->+RegistryController: DoStartMenu()
+
+RegistryController->StartView: DisplayStartMenu()
+RegistryController->StartView: GetStartMenuChoice()
+note right of RegistryController: Case: Add member
+RegistryController->+RegistryController: \nAddMember()
+RegistryController->StartView: DisplayStartMenu()
+RegistryController->MemberList: memberId = GetUniqueMemberId()
+RegistryController->StartView: name = GetStringFromUser()
+RegistryController->StartView: personalNumber = GetStringFromUser()
+
+RegistryController->Member: member = Member(memberId, name, personalNumber)
+RegistryController->MemberList: AddMember(member)
+RegistryController->MemberList: SaveMemberList()
+MemberList->MemberListDAL: Save()
+
+alt successful case
+RegistryController->MemberView: DoMemberView(member)
+else some kind of failure
+RegistryController->StartView: DoesUserWantsToQuit()
+activate RegistryController
+RegistryController->StartView: true -> DoStartMenu()
+RegistryController->StartView: false -> AddMember()
+end

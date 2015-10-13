@@ -1,5 +1,4 @@
-### Requirements for grade 2
-- [Course Page](https://coursepress.lnu.se/kurs/objektorienterad-analys-och-design-med-uml/workshops-2/workshop-2-design/)
+### Requirements for grade 2 [1DV607 Course Page](https://coursepress.lnu.se/kurs/objektorienterad-analys-och-design-med-uml/workshops-2/workshop-2-design/)
 
 Design and implement a simple member registry with CRUD (Create, Retrieve, Update, Delete) functionality. Implementation, class- and interaction-diagrams are to be created and presented. The interaction diagrams should show how a model-view separation is achieved and how the different requirements are met. Design and implementation should match. Save models and implementation in your portfolio. The focus is not to create a usable or fancy user interface but to have a robust and well documented design that can handle change and follows the GRASP. My recommendation is that you base your work on a console application.
 
