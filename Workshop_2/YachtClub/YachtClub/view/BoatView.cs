@@ -9,32 +9,32 @@ namespace YachtClub.view
     class BoatView: BaseView
     {
         // A quick (bad) solution / some kind of loop would be better (not so experienced with enums yet)
-        public model.BoatType GetTypeFromUser()
+        public model.Boat.BoatType GetTypeFromUser()
         {
             Console.WriteLine("-----------------------------------");
             Console.WriteLine(" Boat categories/types");
-            Console.WriteLine(" 1. {0}", model.BoatType.Sailboat);
-            Console.WriteLine(" 2. {0}", model.BoatType.Motorsailer);
-            Console.WriteLine(" 3. {0}", model.BoatType.Canoe);
-            Console.WriteLine(" 4. {0}", model.BoatType.Other);
+            Console.WriteLine(" 1. {0}", model.Boat.BoatType.Sailboat);
+            Console.WriteLine(" 2. {0}", model.Boat.BoatType.Motorsailer);
+            Console.WriteLine(" 3. {0}", model.Boat.BoatType.Canoe);
+            Console.WriteLine(" 4. {0}", model.Boat.BoatType.Other);
             Console.Write("\n -Pick boat category/type: ");
 
             string keyPressed = Console.ReadLine();
             if (keyPressed == "1")
             {
-                return model.BoatType.Sailboat;
+                return model.Boat.BoatType.Sailboat;
             }
             else if (keyPressed == "2")
             {
-                return model.BoatType.Motorsailer;
+                return model.Boat.BoatType.Motorsailer;
             }
             else if (keyPressed == "3")
             {
-                return model.BoatType.Canoe;
+                return model.Boat.BoatType.Canoe;
             }
             else if (keyPressed == "4")
             {
-                return model.BoatType.Canoe;
+                return model.Boat.BoatType.Canoe;
             }
             else
             {
@@ -75,25 +75,6 @@ namespace YachtClub.view
             catch
             {
                 throw new ArgumentException("Invalid input!");
-            }
-        }
-
-        // Edit boat, length
-        public double GetNewLengthFromUser()
-        {
-            try
-            {
-                double newLength = GetLengthFromUser();
-                if (newLength <= 0 || newLength > 50)
-                {
-                    throw new Exception();
-                }
-                Console.WriteLine("-----------------------------------");
-                return newLength;
-            }
-            catch
-            {
-                throw new ArgumentException("Length must be greater than 0m\n and less or equal to 50m");
             }
         }
 

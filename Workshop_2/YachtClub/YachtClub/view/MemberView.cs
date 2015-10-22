@@ -91,15 +91,11 @@ namespace YachtClub.view
         }
 
         // Returns the new name for the member
-        public string ChangeName()
+        public string GetNewName()
         {
             Console.Write(" New name: ");
             string newName = Console.ReadLine();
             Console.WriteLine();
-            // Had to have some validation here, else you could have an empty name which then conflicts with loading the list.txt
-            if (newName.Length < 2) {
-                throw new ArgumentException("Name must be atleast 2 characters long");
-            }
             return newName;
         }
 

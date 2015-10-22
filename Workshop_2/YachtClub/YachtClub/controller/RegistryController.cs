@@ -134,8 +134,7 @@ namespace YachtClub.controller
             try
             {
                 _memberView.DisplayMember(member);
-                string newName = _memberView.ChangeName();
-                member.ChangeName(newName);
+                member.Name = _memberView.GetNewName();
                 _list.SaveMemberList();
                 DoMemberView(member);
             }
@@ -185,7 +184,7 @@ namespace YachtClub.controller
             try
             {
                 _memberView.DisplayMember(member);
-                model.BoatType type = _boatView.GetTypeFromUser();
+                model.Boat.BoatType type = _boatView.GetTypeFromUser();
                 double length = _boatView.GetLengthFromUser();
                 DateTime registrationDate = _boatView.GetRegistrationDate();
                 model.Boat boat = new model.Boat(type, length, registrationDate);
@@ -220,10 +219,8 @@ namespace YachtClub.controller
             {
                 try
                 {
-                    // Perhaps a bad practise for methods to have two kinds of responsabilities? (ex: write some lines & get input, return boat)
                     model.Boat boatToEdit = _boatView.GetBoatToEditOrDelete(member, "edit");
-                    double newLength = _boatView.GetNewLengthFromUser();
-                    boatToEdit.ChangeLength(newLength);
+                    boatToEdit.Length = _boatView.GetLengthFromUser();
                     _list.SaveMemberList();
                     DoMemberView(member);
                 }

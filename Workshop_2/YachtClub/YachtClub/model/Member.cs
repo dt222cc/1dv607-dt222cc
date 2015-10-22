@@ -77,11 +77,5 @@ namespace YachtClub.model
         {
             _boats.Remove(boatToDelete);
         }
-
-        // Change a member's name, probably not the ideal way of doing things (i'm not so experienced)
-        public void ChangeName(string newName)
-        {
-            _name = newName;
-        }
     }
 }

@@ -53,7 +53,7 @@ namespace YachtClub.model
                             // If there is a section for boat. (status,type,length,registrationdate)
                             else if (values[0] == _sectionBoat)
                             {
-                                model.BoatType type;
+                                Boat.BoatType type;
                                 Enum.TryParse(values[1], out type);
                                 double length = double.Parse(values[2]);
                                 DateTime registrationDate = DateTime.Parse(values[3]);

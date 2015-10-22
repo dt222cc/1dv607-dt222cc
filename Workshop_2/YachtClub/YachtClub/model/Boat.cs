@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace YachtClub.model
 {
-    public enum BoatType
-    {
-        Sailboat,
-        Motorsailer,
-        Canoe,
-        Other
-    }
-
     class Boat
     {
+        public enum BoatType
+        {
+            Sailboat,
+            Motorsailer,
+            Canoe,
+            Other
+        }
+
         private BoatType _type;
         private double _length;
         private DateTime _registrationDate;
@@ -38,7 +38,7 @@ namespace YachtClub.model
                 _length = value;
             }
         }
-        // Meh, want to remove the time from datetime (.Date)
+
         public DateTime RegistrationDate
         {
             get { return _registrationDate; }
@@ -50,11 +50,6 @@ namespace YachtClub.model
             Type = type;
             Length = length;
             RegistrationDate = registrationDate.Date;
-        }
-
-        public void ChangeLength(double newLength)
-        {
-            _length = newLength;
         }
     }
 }
