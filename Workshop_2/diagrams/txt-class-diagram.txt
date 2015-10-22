@@ -24,3 +24,36 @@
 [MemberListView]-.->[MemberList]
 [MemberView]-.->[Member]
 [BoatView]-.->[Member]
+
+
+---------------------------
+
+[RegistryController{bg:red}]
+[MemberListDAL{bg:orange}]
+[MemberList{bg:orange}]
+[Member{bg:orange}]
+[Boat{bg:orange}]
+
+[RegistryController]->_list   [MemberList]
+[RegistryController]->_startView   [StartView]
+[RegistryController]->    _listView[MemberListView]
+[RegistryController]->_memberView     [MemberView]
+[RegistryController]->_boatView     [BoatView]
+[RegistryController]-.->[Member]
+[RegistryController]-.->[Boat]
+
+[MemberList]->_mDAL[MemberListDAL]
+[MemberList]-_members *         >[Member]
+[Member]1->     _boats *[Boat]
+[Boat]*   ->_type 1  [<<Boat::BoatType>>{bg:olivedrab}]
+
+[StartView]-^[BaseView]
+[MemberListView]-^[BaseView]
+[MemberView]-^[BaseView]
+[BoatView]-^[BaseView]
+[MemberListView]-.->[MemberList]
+[MemberView]-.->[Member]
+[BoatView]-.->[Member]
+
+[StartView]-.->[<<StartView::StartMenuOperation>>{bg:olivedrab}]
+[MemberView]-.->[<<MemberView::MemberOperation>>{bg:olivedrab}]
