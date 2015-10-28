@@ -18,7 +18,7 @@ namespace YachtClub.view
         {
             _list = memberList;
         }
-        
+
         // Display either Compact- or Verbose list
         public void DisplayMemberListView(bool pickedCompactList, string message = "Enter memberId to view")
         {
@@ -28,7 +28,7 @@ namespace YachtClub.view
                 RenderWindow("            Compact View           ");
             }
             else
-            { 
+            {
                 RenderWindow("            Verbose View           ");
             }
 

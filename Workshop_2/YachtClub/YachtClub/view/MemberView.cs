@@ -43,7 +43,7 @@ namespace YachtClub.view
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("    Registered boats");
                     Console.ResetColor();
-                    
+
                     int count = 1;
                     foreach (model.Boat b in member.Boats)
                     {

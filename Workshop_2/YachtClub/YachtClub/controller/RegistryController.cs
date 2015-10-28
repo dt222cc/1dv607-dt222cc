@@ -236,7 +236,7 @@ namespace YachtClub.controller
                     {
                         EditBoat(member);
                     }
-                } 
+                }
             }
         }
 

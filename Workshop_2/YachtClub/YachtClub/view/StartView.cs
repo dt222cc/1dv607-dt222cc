@@ -28,7 +28,7 @@ namespace YachtClub.view
             Console.WriteLine(" 3. Add a new user                 ");
             Console.WriteLine("-----------------------------------");
         }
-        
+
         // Get the startmenu choice from user, must be integer and within the allowed parameters
         public StartMenuOperation GetStartMenuChoice()
         {
