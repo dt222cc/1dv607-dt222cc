@@ -40,7 +40,7 @@ namespace YachtClub.model
             set
             {
                 Match m = Regex.Match(value, @"(\d{2})?(\d{6})-?(\d{4})");
-               
+
                 if(m.Success)
                 {
                     _personalNumber = m.Groups[2] + "-" + m.Groups[3];

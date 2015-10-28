@@ -27,7 +27,7 @@ namespace YachtClub.model
             {
                 // Creates a list that can contain references to member object.
                 List<Member> members = new List<Member>();
-                
+
                 Member member = null;
                 Boat boat = null;
 
