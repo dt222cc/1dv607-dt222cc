@@ -103,5 +103,3 @@
 
 [StartView]-.->[<<StartView::StartMenuOperation>>{bg:olivedrab}]
 [MemberView]-.->[<<MemberView::MemberOperation>>{bg:olivedrab}]
-
-[Boat{bg:orange}]*   ->1[<<Boat::BoatType>>{bg:olivedrab}]
