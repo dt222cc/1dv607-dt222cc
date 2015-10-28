@@ -25,8 +25,7 @@
 [MemberView]-.->[Member]
 [BoatView]-.->[Member]
 
-
----------------------------
+***
 
 [RegistryController{bg:red}]
 [MemberListDAL{bg:orange}]
@@ -57,3 +56,52 @@
 
 [StartView]-.->[<<StartView::StartMenuOperation>>{bg:olivedrab}]
 [MemberView]-.->[<<MemberView::MemberOperation>>{bg:olivedrab}]
+
+***
+
+[RegistryController|-list;-startView;-listView;-memberView;-boatView;{bg:red}]
+[MemberListDAL|-members;{bg:orange}]
+[MemberList|-members;-mDAL;{bg:orange}]
+[Member|-memberId;-name;-personalNumber;-boats;{bg:orange}]
+[Boat|-type;-length;-registrationDate;{bg:orange}]
+
+[RegistryController]->[MemberList]
+[RegistryController]->[StartView]
+[RegistryController]->[MemberListView]
+[RegistryController]->[MemberView]
+[RegistryController]->[BoatView]
+[RegistryController]-.->[Member]
+[RegistryController]-.->[Boat]
+
+[MemberList]-[MemberListDAL]
+[MemberList]-*>[Member]
+[Member]1->*[Boat]
+[Boat]*->1[<<Boat::BoatType>>{bg:olivedrab}]
+
+[MemberListView]-.->[MemberList]
+[MemberListView]-.->[Boat]
+[MemberView]-.->[Member]
+[MemberView]-.->[Boat]
+[BoatView]-.->[Member]
+[BoatView]-.->[Boat]
+
+[MemberListDAL]-.->[Member]
+[MemberListDAL]-.->[Boat]
+
+***
+
+[RegistryController{bg:red}]->[BaseView]
+[RegistryController{bg:red}]->[StartView]
+[RegistryController{bg:red}]->[MemberListView]
+[RegistryController{bg:red}]->[MemberView]
+[RegistryController{bg:red}]->[BoatView]
+
+[StartView]-^[BaseView]
+[MemberListView]-^[BaseView]
+[MemberView]-^[BaseView]
+[BoatView]-^[BaseView]
+
+[StartView]-.->[<<StartView::StartMenuOperation>>{bg:olivedrab}]
+[MemberView]-.->[<<MemberView::MemberOperation>>{bg:olivedrab}]
+
+[Boat{bg:orange}]*   ->1[<<Boat::BoatType>>{bg:olivedrab}]
