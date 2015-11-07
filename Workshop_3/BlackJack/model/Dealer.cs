@@ -30,7 +30,7 @@ namespace BlackJack.model
                 m_deck = new Deck();
                 ClearHand();
                 a_player.ClearHand();
-                return m_newGameRule.NewGame(m_deck, this, a_player);
+                return m_newGameRule.NewGame(this, a_player);
             }
             return false;
         }
@@ -43,7 +43,7 @@ namespace BlackJack.model
                 //c.Show(true);
                 //a_player.DealCard(c);
 
-                GetNewCard(a_player, true);
+                GetNewCard(a_player);
 
                 return true;
             }
@@ -78,14 +78,14 @@ namespace BlackJack.model
                 ShowHand();
 
                 while (m_hitRule.DoHit(this)) {
-                    GetNewCard(this, true);
+                    GetNewCard(this);
                 }
                 return true;
             }
             return false;
         }
 
-        public void GetNewCard(Player a_player, bool a_showCard)
+        public void GetNewCard(Player a_player, bool a_showCard = true)
         {
             foreach (IBlackJackObserver a_observer in m_observers)
             {

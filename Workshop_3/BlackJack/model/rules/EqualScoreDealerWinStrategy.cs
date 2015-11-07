@@ -7,7 +7,7 @@ namespace BlackJack.model.rules
 {
     /*
      * If score is 21 or below
-     * 
+     *
      * Dealer wins if the dealer's score is greater or equal to the player's score
      */
     class EqualScoreDealerWinStrategy : IEqualScoreWinStrategy

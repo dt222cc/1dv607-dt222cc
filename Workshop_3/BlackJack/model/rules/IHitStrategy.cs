@@ -7,6 +7,6 @@ namespace BlackJack.model.rules
 {
     interface IHitStrategy
     {
-        bool DoHit(model.Player a_dealer);
+        bool DoHit(Player a_dealer);
     }
 }
